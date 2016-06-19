@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/cdi-api-1.1-PFD.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/classmate-1.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/el-api-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/geronimo-jta_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/hibernate-commons-annotations-5.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/hibernate-core-5.2.0.Final.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/jandex-2.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/javassist-3.20.0-GA.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/jboss-logging-3.3.0.Final.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/required/jsr250-api-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/mysql/mysql-connector-java-5.1.38-bin.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate 5.2.0/jpa-metamodel-generator/hibernate-jpamodelgen-5.2.0.Final.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
