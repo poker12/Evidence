@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -23,30 +22,27 @@
                </items>
             </ToolBar>
             <Separator />
-            <SplitPane dividerPositions="0.5" prefHeight="0.0" prefWidth="1281.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+            <SplitPane dividerPositions="0.5" prefHeight="0.0" prefWidth="1177.0">
+               <items>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0">
                      <children>
                         <ChoiceBox prefWidth="150.0" />
                         <TextField prefHeight="25.0" prefWidth="355.0" promptText="Vyhledávání" />
                      </children>
                   </HBox>
-              </items>
+               </items>
             </SplitPane>
             <Separator />
             <TableView>
                <columns>
-                  <TableColumn prefWidth="60.0" text="id" />
-                  <TableColumn prefWidth="208.0" text="název" />
-                  <TableColumn minWidth="0.0" prefWidth="134.0" text="kategorie" />
-                  <TableColumn prefWidth="87.0" text="počet" />
-                  <TableColumn prefWidth="70.0" text="cena s DPH" />
-                  <TableColumn prefWidth="66.0" text="sazba DPH" />
-                  <TableColumn prefWidth="143.0" text="čárové kódy" />
-                  <TableColumn prefWidth="47.0" text="e-shop" />
-                  <TableColumn minWidth="0.0" prefWidth="72.0" text="archivován" />
-                  <TableColumn prefWidth="392.0" text="popis" />
+                  <TableColumn prefWidth="71.0" text="produkt" />
+                  <TableColumn minWidth="0.0" prefWidth="96.0" text="kód produktu" />
+                  <TableColumn prefWidth="110.0" text="cena za kus s DPH" />
+                  <TableColumn prefWidth="107.0" text="cena za kus bez DPH" />
+                  <TableColumn prefWidth="66.0" text="počet kusů" />
+                  <TableColumn prefWidth="93.0" text="sazba DPH" />
+                  <TableColumn prefWidth="145.0" text="naskladněno" />
                </columns>
             </TableView>
          </children>

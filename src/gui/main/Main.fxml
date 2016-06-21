@@ -56,22 +56,22 @@
                       </Tab>
                       <Tab text="Objednávky">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      		<fx:include fx:id="paneProduct" source="/gui/order/manageOrder/ManageOrder.fxml" />
                         </content>
                       </Tab>
                         <Tab text="Faktury">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <fx:include fx:id="paneProduct" source="/gui/invoice/manageInvoice/ManageInvoice.fxml" />
                           </content>
                         </Tab>
                         <Tab text="Naskladnění">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <fx:include fx:id="paneProduct" source="/gui/entryOfGoods/manageEntryOfGoods/ManageEntryOfGoods.fxml" />
                           </content>
                         </Tab>
                         <Tab text="Výdaje">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <fx:include fx:id="paneProduct" source="/gui/expense/manageExpense/ManageExpense.fxml" />
                           </content>
                         </Tab>
                         <Tab text="Uživatelé">

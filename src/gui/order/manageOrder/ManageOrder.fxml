@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox fx:id="paneProduct" fillWidth="true" snapToPixel="false">
+         <children>
+            <ToolBar prefHeight="4.0" prefWidth="200.0">
+               <items>
+                  <Button mnemonicParsing="false" text="Button" />
+               </items>
+            </ToolBar>
+            <Separator />
+            <SplitPane dividerPositions="0.5" prefHeight="0.0" prefWidth="1176.0">
+               <items>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zobrazené objednávky" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1176.0" spacing="10.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" selected="true" text="K expedici">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="orderListSelectChoices" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Aktivní" toggleGroup="$orderListSelectChoices" />
+                              <RadioButton mnemonicParsing="false" text="Stornované" toggleGroup="$orderListSelectChoices" />
+                              <RadioButton mnemonicParsing="false" text="Vśechny" toggleGroup="$orderListSelectChoices" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="0.0">
+                     <children>
+                        <ChoiceBox prefWidth="150.0" />
+                        <TextField prefHeight="25.0" prefWidth="355.0" promptText="Vyhledávání" />
+                     </children>
+                  </HBox>
+               </items>
+            </SplitPane>
+            <Separator />
+            <TableView>
+               <columns>
+                  <TableColumn prefWidth="60.0" text="id" />
+                  <TableColumn minWidth="0.0" prefWidth="134.0" text="storno" />
+                  <TableColumn prefWidth="130.0" text="dodáno" />
+                  <TableColumn prefWidth="128.0" text="expedováno" />
+                  <TableColumn prefWidth="107.0" text="platební metoda" />
+                  <TableColumn prefWidth="66.0" text="zadáno" />
+                  <TableColumn prefWidth="84.0" text="cena s DPH" />
+                  <TableColumn prefWidth="106.0" text="fakturační adresa" />
+                  <TableColumn minWidth="0.0" prefWidth="209.0" text="doručovací adresa" />
+                  <TableColumn prefWidth="150.0" text="uživatel" />
+               </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
