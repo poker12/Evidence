@@ -29,17 +29,16 @@
                <items>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="Zobrazené objednávky" />
+                        <Label text="Zobrazení uživatelé" />
                         <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="1176.0" spacing="10.0">
                            <children>
-                              <RadioButton mnemonicParsing="false" selected="true" text="k expedici">
+                              <RadioButton mnemonicParsing="false" selected="true" text="e-shop uživatelé">
                                  <toggleGroup>
-                                    <ToggleGroup fx:id="orderListSelectChoices" />
+                                    <ToggleGroup fx:id="userListSelectChoices" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="aktivní" toggleGroup="$orderListSelectChoices" />
-                              <RadioButton mnemonicParsing="false" text="stornované" toggleGroup="$orderListSelectChoices" />
-                              <RadioButton mnemonicParsing="false" text="všechny" toggleGroup="$orderListSelectChoices" />
+                              <RadioButton mnemonicParsing="false" text="zaměstnanci" toggleGroup="$userListSelectChoices" />
+                              <RadioButton mnemonicParsing="false" text="všichni" toggleGroup="$userListSelectChoices" />
                            </children>
                         </HBox>
                      </children>
@@ -55,16 +54,16 @@
             <Separator />
             <TableView>
                <columns>
-                  <TableColumn prefWidth="60.0" text="id" />
-                  <TableColumn minWidth="0.0" prefWidth="134.0" text="storno" />
-                  <TableColumn prefWidth="130.0" text="dodáno" />
-                  <TableColumn prefWidth="128.0" text="expedováno" />
-                  <TableColumn prefWidth="107.0" text="platební metoda" />
-                  <TableColumn prefWidth="66.0" text="zadáno" />
-                  <TableColumn prefWidth="84.0" text="cena s DPH" />
-                  <TableColumn prefWidth="106.0" text="fakturační adresa" />
-                  <TableColumn minWidth="0.0" prefWidth="209.0" text="doručovací adresa" />
-                  <TableColumn prefWidth="150.0" text="uživatel" />
+                  <TableColumn prefWidth="60.0" text="login" />
+                  <TableColumn minWidth="0.0" prefWidth="134.0" text="typ uživatele" />
+                  <TableColumn prefWidth="130.0" text="adresa" />
+                  <TableColumn prefWidth="128.0" text="telefon" />
+                  <TableColumn prefWidth="107.0" text="email" />
+                  <TableColumn prefWidth="66.0" text="firma" />
+                  <TableColumn prefWidth="84.0" text="ič" />
+                  <TableColumn prefWidth="106.0" text="dič" />
+                  <TableColumn minWidth="0.0" prefWidth="123.0" text="příjmení a jméno" />
+                  <TableColumn prefWidth="236.0" text="role" />
                </columns>
             </TableView>
          </children>

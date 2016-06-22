@@ -32,14 +32,14 @@
                         <Label text="Zobrazené faktury" />
                         <HBox prefHeight="0.0" prefWidth="1176.0" spacing="10.0">
                            <children>
-                              <RadioButton mnemonicParsing="false" selected="true" text="Čekající na zaplacení">
+                              <RadioButton mnemonicParsing="false" selected="true" text="čekající na zaplacení">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="invoiceListSelectChoices" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="Zaplacené" toggleGroup="$invoiceListSelectChoices" />
-                              <RadioButton mnemonicParsing="false" text="Stornované" toggleGroup="$invoiceListSelectChoices" />
-                              <RadioButton mnemonicParsing="false" text="Vśechny" toggleGroup="$invoiceListSelectChoices" />
+                              <RadioButton mnemonicParsing="false" text="zaplacené" toggleGroup="$invoiceListSelectChoices" />
+                              <RadioButton mnemonicParsing="false" text="stornované" toggleGroup="$invoiceListSelectChoices" />
+                              <RadioButton mnemonicParsing="false" text="všechny" toggleGroup="$invoiceListSelectChoices" />
                            </children>
                         </HBox>
                      </children>
