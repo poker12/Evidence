@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+      <TreeView prefHeight="200.0" prefWidth="200.0" />
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Přidat kategorii" />
+            <Separator prefWidth="200.0" />
+            <HBox prefHeight="0.0" prefWidth="296.0">
+               <children>
+                  <Label text="Nadřazená kategorie" />
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox prefHeight="0.0" prefWidth="296.0">
+               <children>
+                  <Label text="Název kategorie" />
+                  <TextField />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" text="Vytvořit kategorii" />
+            <Separator prefWidth="200.0" />
+            <Label text="Upravit kategorii" />
+            <Separator prefWidth="200.0" />
+            <HBox prefHeight="0.0" prefWidth="296.0">
+               <children>
+                  <Label text="Zvolená kategorie" />
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox prefHeight="0.0" prefWidth="296.0">
+               <children>
+                  <Label text="Nový název" />
+                  <TextField />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" text="Uložit změny" />
+            <Separator prefWidth="200.0" />
+            <Label text="Odstranit kategorii" />
+            <Separator prefWidth="200.0" />
+            <Label disable="true" prefHeight="51.0" prefWidth="296.0" text="Odstranit lze jen kategorii, která neobsahuje žádné produkty. Pokud chcete kategorii smazat, přeřaďte její produkty do jiných kategorií." wrapText="true" />
+            <HBox prefHeight="0.0" prefWidth="296.0">
+               <children>
+                  <Label text="Zvolená kategorie" />
+                  <TextField />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" text="Odstranit kategorii" />
+         </children>
+      </VBox>
+  </items>
+</SplitPane>
