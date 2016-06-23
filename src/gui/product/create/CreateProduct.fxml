@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<ScrollPane prefHeight="464.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox fx:id="createProduct" fillWidth="true" prefHeight="462.0" prefWidth="736.0" snapToPixel="false">
+         <children>
+            <Pane prefHeight="391.0" prefWidth="736.0">
+               <children>
+                  <Separator layoutX="252.0" layoutY="1.0" orientation="VERTICAL" prefHeight="392.0" prefWidth="0.0" />
+                  <Separator layoutX="503.0" layoutY="9.0" orientation="VERTICAL" prefHeight="383.0" prefWidth="0.0" />
+                  <Label layoutX="8.0" layoutY="21.0" text="   Kód produktu" />
+                  <TextField layoutX="114.0" layoutY="16.0" prefHeight="25.0" prefWidth="130.0" />
+                  <TextField layoutX="114.0" layoutY="49.0" prefHeight="25.0" prefWidth="130.0" />
+                  <TextField layoutX="114.0" layoutY="82.0" prefHeight="25.0" prefWidth="130.0" />
+                  <TextArea layoutX="114.0" layoutY="152.0" prefHeight="75.0" prefWidth="130.0" />
+                  <TextField layoutX="115.0" layoutY="276.0" prefHeight="25.0" prefWidth="129.0" />
+                  <CheckBox layoutX="59.0" layoutY="311.0" mnemonicParsing="false" text="Zobrazit v e-shopu" />
+                  <CheckBox layoutX="60.0" layoutY="340.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="150.0" text="Archivovat (vyřadit z vyhledávání)" textAlignment="CENTER" wrapText="true" />
+                  <Label layoutX="8.0" layoutY="54.0" text="* Název" />
+                  <ComboBox layoutX="114.0" layoutY="242.0" prefHeight="25.0" prefWidth="97.0" />
+                  <Button layoutX="211.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="+" />
+                  <ComboBox layoutX="114.0" layoutY="117.0" prefHeight="25.0" prefWidth="130.0" />
+                  <Label layoutX="8.0" layoutY="87.0" text="   Cena s DPH" />
+                  <Label layoutX="8.0" layoutY="122.0" text="   Sazba" />
+                  <Label layoutX="8.0" layoutY="152.0" text="   Popis" />
+                  <Label layoutX="8.0" layoutY="247.0" text="   Kategorie" />
+                  <Label layoutX="8.0" layoutY="281.0" text="   Počet ks" />
+                  <Label layoutX="42.0" layoutY="312.0" text="*" />
+                  <Label layoutX="42.0" layoutY="351.0" text="*" />
+                  <Label layoutX="281.0" layoutY="21.0" text="Přidat Obrázek" />
+                  <Separator layoutX="257.0" layoutY="197.0" prefHeight="0.0" prefWidth="241.0" />
+                  <Button layoutX="389.0" layoutY="16.0" mnemonicParsing="false" text="Procházet" />
+                  <ListView layoutX="268.0" layoutY="52.0" prefHeight="130.0" prefWidth="224.0" />
+                  <ListView layoutX="268.0" layoutY="209.0" prefHeight="168.0" prefWidth="224.0" />
+                  <Label layoutX="543.0" layoutY="21.0" text="Přidat čárový kód" />
+                  <ListView layoutX="518.0" layoutY="52.0" prefHeight="325.0" prefWidth="220.0" />
+                  <Button layoutX="671.0" layoutY="16.0" mnemonicParsing="false" text="+" />
+               </children>
+            </Pane>
+            <Separator layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="736.0" />
+            <SplitPane dividerPositions="0.8487738419618529" prefHeight="68.0" prefWidth="409.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="13.0" prefWidth="159.0">
+                     <children>
+                        <Button layoutX="341.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Storno" />
+                        <Button layoutX="341.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Uložit" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <Button layoutX="19.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Smazat" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children></VBox>
+   </content>
+</ScrollPane>
