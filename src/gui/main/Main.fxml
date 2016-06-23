@@ -41,8 +41,8 @@
       <TabPane prefHeight="322.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Kasa">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <content>              
+              <fx:include fx:id="paneProduct" source="/gui/pointOfSale/pointOfSale.fxml" />
             </content>
           </Tab>
           <Tab text="Správa">

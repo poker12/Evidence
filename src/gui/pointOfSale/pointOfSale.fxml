@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -61,7 +60,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <TableView prefHeight="576.0" prefWidth="545.0">
+                  <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="576.0" prefWidth="545.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="kat. číslo" />
                       <TableColumn prefWidth="197.0" text="název" />
@@ -76,8 +75,8 @@
                <children>
                   <SplitPane dividerPositions="0.5" prefHeight="0.0" prefWidth="544.0">
                     <items>
-                        <TextField promptText="katalogizační číslo" />
-                        <TextField promptText="čárový kód" />
+                        <TextField maxWidth="1.7976931348623157E308" promptText="katalogizační číslo" />
+                        <TextField maxWidth="1.7976931348623157E308" promptText="čárový kód" />
                     </items>
                   </SplitPane>
                   <Separator prefWidth="200.0" />
@@ -97,7 +96,7 @@
                   </HBox>
                   <HBox prefHeight="11.0" prefWidth="544.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefWidth="530.0">
+                        <Label alignment="CENTER_RIGHT" prefWidth="530.0" text="-">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -188,17 +187,22 @@
                         </Label>
                      </children>
                   </HBox>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Přidat položku">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                   <Separator prefWidth="200.0" />
                   <VBox alignment="TOP_RIGHT" prefHeight="183.0" prefWidth="530.0">
                      <children>
                         <CheckBox mnemonicParsing="false" text="Na firmu" />
-                        <TextField promptText="město" />
-                        <TextField promptText="ulice a č. p." />
-                        <TextField promptText="PSČ" />
-                        <TextField promptText="stát" />
-                        <TextField promptText="ič" />
-                        <TextField promptText="dič" />
-                        <TextField promptText="název firmy" />
+                        <TextField alignment="CENTER_RIGHT" disable="true" promptText="ič" />
+                        <TextField alignment="CENTER_RIGHT" disable="true" promptText="dič" />
+                        <TextField alignment="CENTER_RIGHT" disable="true" promptText="název firmy" />
+                        <TextField alignment="CENTER_RIGHT" disable="true" promptText="město" />
+                        <TextField alignment="CENTER_RIGHT" disable="true" promptText="ulice a č. p." />
+                        <TextField alignment="CENTER_RIGHT" disable="true" promptText="PSČ" />
+                        <TextField alignment="CENTER_RIGHT" disable="true" promptText="stát" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -207,6 +211,20 @@
                         <Insets right="15.0" />
                      </padding>
                   </VBox>
+                  <Separator prefWidth="200.0" />
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Dokončit">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Stornovat">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
          </items>
