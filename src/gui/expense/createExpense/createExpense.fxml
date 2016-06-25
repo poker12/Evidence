@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="1103.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="1223.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.33, 0.66" prefHeight="235.0" prefWidth="880.0">
          <items>
@@ -32,13 +32,13 @@
                   <Separator prefWidth="200.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Název firmy" />
+                        <Label text="Název firmy*" />
                         <TextField />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="IČ" />
+                        <Label text="IČ*" />
                         <TextField />
                      </children>
                   </HBox>
@@ -50,25 +50,25 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Ulice a č. p." />
+                        <Label text="Ulice a č. p.*" />
                         <TextField />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Město" />
+                        <Label text="Město*" />
                         <TextField />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="PSČ" />
+                        <Label text="PSČ*" />
                         <TextField />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Stát" />
+                        <Label text="Stát*" />
                         <TextField />
                      </children>
                   </HBox>
@@ -78,7 +78,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Doklad č." />
+                        <Label text="Doklad č.*" />
                         <TextField />
                      </children>
                   </HBox>
@@ -107,7 +107,7 @@
                         <Button disable="true" mnemonicParsing="false" text="Přidat" />
                      </children>
                   </HBox>
-                  <TableView disable="true" prefHeight="99.0" prefWidth="275.0">
+                  <TableView prefHeight="99.0" prefWidth="275.0">
                     <columns>
                       <TableColumn prefWidth="145.0" text="sazba" />
                       <TableColumn prefWidth="137.0" text="cena" />
@@ -120,31 +120,31 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Datum zápisu" />
+                        <Label text="Datum zápisu*" />
                         <DatePicker />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Datum doručení" />
+                        <Label text="Datum doručení*" />
                         <DatePicker />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Datum splatnosti" />
+                        <Label text="DUZP*" />
                         <DatePicker />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="DUZP" />
+                        <Label text="Datum splatnosti*" />
                         <DatePicker />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Metoda platby" />
+                        <Label text="Metoda platby*" />
                         <ComboBox prefHeight="25.0" prefWidth="175.0" />
                      </children>
                   </HBox>
@@ -158,6 +158,7 @@
             </VBox>
          </items>
       </SplitPane>
+      <Separator prefWidth="200.0" />
       <SplitPane dividerPositions="0.33" prefHeight="327.0" prefWidth="880.0">
          <items>
             <VBox prefHeight="200.0" prefWidth="100.0">
@@ -203,7 +204,7 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="Množství" />
-                        <TextField />
+                        <TextField text="1" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
@@ -234,6 +235,16 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Button mnemonicParsing="false" text="Přídat" />
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <Separator prefWidth="200.0" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="400.0">
+                     <children>
+                        <Label text="Vybraná položka: " />
+                        <TextField editable="false" prefHeight="25.0" prefWidth="45.0" promptText="#" />
+                        <Button mnemonicParsing="false" text="Editovat" />
+                        <Button mnemonicParsing="false" text="Odebrat" />
                      </children>
                   </HBox>
                </children></VBox>
