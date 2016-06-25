@@ -19,7 +19,8 @@
          <children>
             <ToolBar prefHeight="4.0" prefWidth="200.0">
                <items>
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" text="+" />
+                  <Button mnemonicParsing="false" text="Upravit" />
                </items>
             </ToolBar>
             <Separator />
