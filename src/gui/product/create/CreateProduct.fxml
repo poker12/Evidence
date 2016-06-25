@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane prefHeight="464.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane prefHeight="464.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.product.create.CreateProductController">
    <content>
       <VBox fx:id="createProduct" fillWidth="true" prefHeight="462.0" prefWidth="736.0" snapToPixel="false">
          <children>
@@ -23,7 +23,7 @@
                   <Separator layoutX="252.0" layoutY="1.0" orientation="VERTICAL" prefHeight="392.0" prefWidth="0.0" />
                   <Separator layoutX="503.0" layoutY="9.0" orientation="VERTICAL" prefHeight="383.0" prefWidth="0.0" />
                   <Label layoutX="8.0" layoutY="21.0" text="   Kód produktu" />
-                  <TextField layoutX="114.0" layoutY="16.0" prefHeight="25.0" prefWidth="130.0" />
+                  <TextField disable="true" layoutX="114.0" layoutY="16.0" prefHeight="25.0" prefWidth="130.0" />
                   <TextField layoutX="114.0" layoutY="49.0" prefHeight="25.0" prefWidth="130.0" />
                   <TextField layoutX="114.0" layoutY="82.0" prefHeight="25.0" prefWidth="130.0" />
                   <TextArea layoutX="114.0" layoutY="152.0" prefHeight="75.0" prefWidth="130.0" />
@@ -32,8 +32,8 @@
                   <CheckBox layoutX="60.0" layoutY="340.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="150.0" text="Archivovat (vyřadit z vyhledávání)" textAlignment="CENTER" wrapText="true" />
                   <Label layoutX="8.0" layoutY="54.0" text="* Název" />
                   <ComboBox layoutX="114.0" layoutY="242.0" prefHeight="25.0" prefWidth="97.0" />
-                  <Button layoutX="211.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="+" />
-                  <Label layoutX="8.0" layoutY="87.0" text="   Cena s DPH" />
+                  <Button layoutX="211.0" layoutY="242.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="25.0" prefWidth="31.0" text="+" />
+                  <Label layoutX="8.0" layoutY="87.0" text="* Cena s DPH" />
                   <Label layoutX="8.0" layoutY="122.0" text="   Sazba" />
                   <Label layoutX="8.0" layoutY="152.0" text="   Popis" />
                   <Label layoutX="8.0" layoutY="247.0" text="   Kategorie" />
@@ -44,12 +44,14 @@
                   <Separator layoutX="257.0" layoutY="197.0" prefHeight="0.0" prefWidth="241.0" />
                   <Button layoutX="389.0" layoutY="16.0" mnemonicParsing="false" text="Procházet" />
                   <ListView layoutX="268.0" layoutY="52.0" prefHeight="130.0" prefWidth="224.0" />
-                  <ListView layoutX="268.0" layoutY="209.0" prefHeight="168.0" prefWidth="224.0" />
-                  <Label layoutX="543.0" layoutY="21.0" text="Přidat čárový kód" />
+                  <ListView layoutX="268.0" layoutY="235.0" prefHeight="142.0" prefWidth="224.0" />
+                  <Label layoutX="281.0" layoutY="207.0" text="Přidat čárový kód" />
                   <ListView layoutX="518.0" layoutY="52.0" prefHeight="325.0" prefWidth="220.0" />
-                  <Button layoutX="671.0" layoutY="16.0" mnemonicParsing="false" text="+" />
+                  <Button layoutX="409.0" layoutY="202.0" mnemonicParsing="false" text="+" />
                   <ComboBox editable="true" layoutX="115.0" layoutY="118.0" prefHeight="25.0" prefWidth="97.0" />
                   <Button layoutX="212.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="+" />
+                  <Label layoutX="518.0" layoutY="20.0" text="Obrázky" />
+                  <Button layoutX="625.0" layoutY="16.0" mnemonicParsing="false" text="Odstranit obrázek" />
                </children>
             </Pane>
             <Separator layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="736.0" />
