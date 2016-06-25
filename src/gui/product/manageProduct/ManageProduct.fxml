@@ -37,7 +37,7 @@
             <Separator />
             <TableView>
                <columns>
-                  <TableColumn prefWidth="60.0" text="id" />
+                  <TableColumn prefWidth="60.0" text="PLU" />
                   <TableColumn prefWidth="208.0" text="název" />
                   <TableColumn minWidth="0.0" prefWidth="134.0" text="kategorie" />
                   <TableColumn prefWidth="87.0" text="počet" />

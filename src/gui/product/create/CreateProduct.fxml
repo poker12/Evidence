@@ -33,7 +33,6 @@
                   <Label layoutX="8.0" layoutY="54.0" text="* Název" />
                   <ComboBox layoutX="114.0" layoutY="242.0" prefHeight="25.0" prefWidth="97.0" />
                   <Button layoutX="211.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="+" />
-                  <ComboBox layoutX="114.0" layoutY="117.0" prefHeight="25.0" prefWidth="130.0" />
                   <Label layoutX="8.0" layoutY="87.0" text="   Cena s DPH" />
                   <Label layoutX="8.0" layoutY="122.0" text="   Sazba" />
                   <Label layoutX="8.0" layoutY="152.0" text="   Popis" />
@@ -49,6 +48,8 @@
                   <Label layoutX="543.0" layoutY="21.0" text="Přidat čárový kód" />
                   <ListView layoutX="518.0" layoutY="52.0" prefHeight="325.0" prefWidth="220.0" />
                   <Button layoutX="671.0" layoutY="16.0" mnemonicParsing="false" text="+" />
+                  <ComboBox editable="true" layoutX="115.0" layoutY="118.0" prefHeight="25.0" prefWidth="97.0" />
+                  <Button layoutX="212.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="+" />
                </children>
             </Pane>
             <Separator layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="736.0" />
