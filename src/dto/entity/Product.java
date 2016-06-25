@@ -58,9 +58,6 @@ public class Product {
 	@OneToMany(mappedBy="product", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<EntryOfGoods> entriesOfGoods;
 	
-	@OneToMany(mappedBy="product", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private List<ProductVatRate> vatRates;
-	
 	@Override
 	public int hashCode() {
 		return 31;

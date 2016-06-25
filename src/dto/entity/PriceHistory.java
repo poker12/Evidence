@@ -23,7 +23,7 @@ public class PriceHistory {
 	@JoinColumn(name="product_id", nullable=false, updatable=false)
 	private Product product;
 	
-	@Column(name="start_date_time", nullable=false)
+	@Column(name="start_date_time", nullable=false, columnDefinition="datetime default now()")
 	private LocalDateTime startDateTime;
 	
 	@Column(name="end_date_time", nullable=true)
@@ -34,5 +34,8 @@ public class PriceHistory {
 	
 	@Column(name="selling_price_without_vat", nullable=true, precision=10, scale=2)
 	private BigDecimal oldSellingPriceWithoutVat;
+	
+	@Column(name="vat_rate", precision=5, scale=2, nullable=false)
+	private BigDecimal vatRate;
 
 }
