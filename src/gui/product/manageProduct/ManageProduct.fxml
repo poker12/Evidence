@@ -36,18 +36,18 @@
               </items>
             </SplitPane>
             <Separator />
-            <TableView>
+            <TableView fx:id="productTable">
                <columns>
-                  <TableColumn prefWidth="60.0" text="PLU" />
-                  <TableColumn prefWidth="208.0" text="název" />
-                  <TableColumn minWidth="0.0" prefWidth="134.0" text="kategorie" />
-                  <TableColumn prefWidth="87.0" text="počet" />
-                  <TableColumn prefWidth="70.0" text="cena s DPH" />
-                  <TableColumn prefWidth="66.0" text="sazba DPH" />
-                  <TableColumn prefWidth="143.0" text="čárové kódy" />
-                  <TableColumn prefWidth="47.0" text="e-shop" />
-                  <TableColumn minWidth="0.0" prefWidth="72.0" text="archivován" />
-                  <TableColumn prefWidth="392.0" text="popis" />
+                  <TableColumn fx:id="plu" prefWidth="60.0" text="PLU" />
+                  <TableColumn fx:id="name" prefWidth="208.0" text="název" />
+                  <TableColumn fx:id="category" minWidth="0.0" prefWidth="134.0" text="kategorie" />
+                  <TableColumn fx:id="quantity" prefWidth="87.0" text="počet" />
+                  <TableColumn fx:id="priceWithVat" prefWidth="70.0" text="cena s DPH" />
+                  <TableColumn fx:id="vatRate" prefWidth="66.0" text="sazba DPH" />
+                  <TableColumn fx:id="barcodes" prefWidth="143.0" text="čárové kódy" />
+                  <TableColumn fx:id="eshop" prefWidth="47.0" text="e-shop" />
+                  <TableColumn fx:id="archived" minWidth="0.0" prefWidth="72.0" text="archivován" />
+                  <TableColumn fx:id="description" prefWidth="392.0" text="popis" />
                </columns>
             </TableView>
          </children>

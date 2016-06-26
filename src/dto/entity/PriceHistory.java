@@ -78,5 +78,61 @@ public class PriceHistory {
 		this.vatRate = vatRate;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public LocalDateTime getStartDateTime() {
+		return startDateTime;
+	}
+
+	public void setStartDateTime(LocalDateTime startDateTime) {
+		this.startDateTime = startDateTime;
+	}
+
+	public LocalDateTime getEndDateTime() {
+		return endDateTime;
+	}
+
+	public void setEndDateTime(LocalDateTime endDateTime) {
+		this.endDateTime = endDateTime;
+	}
+
+	public BigDecimal getSellingPriceWithVat() {
+		return sellingPriceWithVat;
+	}
+
+	public void setSellingPriceWithVat(BigDecimal sellingPriceWithVat) {
+		this.sellingPriceWithVat = sellingPriceWithVat;
+	}
+
+	public BigDecimal getSellingPriceWithoutVat() {
+		return sellingPriceWithoutVat;
+	}
+
+	public void setSellingPriceWithoutVat(BigDecimal sellingPriceWithoutVat) {
+		this.sellingPriceWithoutVat = sellingPriceWithoutVat;
+	}
+
+	public BigDecimal getVatRate() {
+		return vatRate;
+	}
+
+	public void setVatRate(BigDecimal vatRate) {
+		this.vatRate = vatRate;
+	}
+
 	
 }
