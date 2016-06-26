@@ -29,7 +29,6 @@ public class ProductCategory {
 	
 	@ManyToOne
 	@JoinColumn(name="supercategory_id", nullable=true)
-	//@Column(name="supercategory_id", nullable=true)
 	private ProductCategory superCategory;
 	
 	@OneToMany(mappedBy="category", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
@@ -88,6 +87,12 @@ public class ProductCategory {
 
 	public void setSubcategories(List<ProductCategory> subcategories) {
 		this.subcategories = subcategories;
+	}
+
+	public ProductCategory(String name, ProductCategory superCategory) {
+		super();
+		this.name = name;
+		this.superCategory = superCategory;
 	}
 	
 	

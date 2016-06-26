@@ -66,7 +66,7 @@ public class ProductCategoryDao extends HibernateGenericDao<ProductCategory, Lon
 		for(int i = 0; i < levelParsed.length; i++){
 			ProductCategoryLevelContainer pclc = new ProductCategoryLevelContainer();
 			pclc.level = Integer.parseInt(levelParsed[i]);
-			pclc.productCategoryId = Integer.parseInt(idParsed[i]);
+			pclc.productCategoryId = Long.parseLong(idParsed[i]);
 			pclc.categoryName = nameParsed[i];
 			list.add(pclc);
 		}
