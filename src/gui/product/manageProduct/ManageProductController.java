@@ -6,12 +6,11 @@ import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.StringJoiner;
 
-import dao.hibernate.product.ProductDao;
 import dto.entity.Barcode;
 import dto.entity.PriceHistory;
 import dto.entity.Product;
-import dto.entity.ProductCategory;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -100,8 +99,6 @@ public class ManageProductController implements Initializable{
 			}
 		});
 		
-		//vatRate.setCellValueFactory(new PropertyValueFactory<Product, BigDecimal>("priceHistory[0].vatRate"));
-		
 		vatRate.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product,BigDecimal>, ObservableValue<BigDecimal>>() {
 
 			@Override
@@ -126,7 +123,21 @@ public class ManageProductController implements Initializable{
 			}
 		});
 		
-		barcodes.setCellValueFactory(new PropertyValueFactory<Product, String>("barcodes.barcode"));
+		//barcodes.setCellValueFactory(new PropertyValueFactory<Product, String>("barcodes.barcode"));
+		
+		barcodes.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product,String>, ObservableValue<String>>() {
+
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<Product, String> param) {
+				List<Barcode> barcodeList = param.getValue().getBarcodes();
+				StringJoiner list = new StringJoiner(", ");
+				for(Barcode item : barcodeList){
+					list.add(item.getBarcode());
+				}
+				return new ReadOnlyStringWrapper(list.toString());
+			}
+		});
+		
 		eshop.setCellValueFactory(new PropertyValueFactory<Product, Boolean>("visibilityInEshop"));
 		archived.setCellValueFactory(new PropertyValueFactory<Product, Boolean>("archived"));
 		description.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));

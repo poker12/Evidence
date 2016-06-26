@@ -1,8 +1,12 @@
 package application;
 	
+import dao.hibernate.PersistenceManager;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -19,6 +23,16 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				
+				@Override
+				public void handle(WindowEvent event) {
+					if(PersistenceManager.getInstance().isOpen())
+						PersistenceManager.getInstance().close();
+					Platform.exit();
+					System.exit(0);
+				}
+			});
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -27,4 +41,5 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }

@@ -23,5 +23,30 @@ public class Barcode {
 	
 	@Column(name="barcode", nullable=false, length=13)
 	private String barcode; // EAN13, EAN8, ISBN, UPC_A, UPC_E
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public String getBarcode() {
+		return barcode;
+	}
+
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
+	}
+	
 	
 }
