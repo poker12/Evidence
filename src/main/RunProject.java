@@ -18,7 +18,7 @@ public class RunProject {
 			System.out.println(new String(new char[p.level]).replace("\0", "  ") + p.categoryName);
 		}
 		
-		//pcd.persist(new ProductCategory("Knihy", null));
+		pcd.persist(new ProductCategory("Knihy", null));
 		
 		if(PersistenceManager.getInstance().isOpen())
 			PersistenceManager.getInstance().close();

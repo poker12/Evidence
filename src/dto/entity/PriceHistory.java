@@ -26,7 +26,8 @@ public class PriceHistory {
 	@JoinColumn(name="product_id", nullable=false, updatable=false)
 	private Product product;
 	
-	@Column(name="start_date_time", nullable=false, columnDefinition="datetime default now()")
+	//@Column(name="start_date_time", nullable=false, columnDefinition="datetime default now()")
+	@Column(name="start_date_time", nullable=true, columnDefinition="datetime default now()")
 	private LocalDateTime startDateTime;
 	
 	@Column(name="end_date_time", nullable=true)
