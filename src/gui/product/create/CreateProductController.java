@@ -98,11 +98,15 @@ public class CreateProductController implements Initializable{
 			product.setPriceHistory(phList);
 			ProductService pdo = new ProductService();
 			pdo.persist(product);
+			plu.setText(product.getId().toString());
+			quantity.setText(product.getQuantity().toString());
 		}
 		else{
 			
 		}
 		
 	}
+	
+	//public void edit(Product)
 	
 }

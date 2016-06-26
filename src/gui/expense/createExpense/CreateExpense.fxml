@@ -26,50 +26,50 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Dodavatel" />
-                        <ComboBox prefHeight="25.0" prefWidth="139.0" promptText="Vybrat" />
+                        <ComboBox fx:id="selectedCompany" prefHeight="25.0" prefWidth="139.0" promptText="Vybrat" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Název firmy*" />
-                        <TextField />
+                        <TextField fx:id="companyName" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="IČ*" />
-                        <TextField />
+                        <TextField fx:id="companyTin" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="DIČ" />
-                        <TextField />
+                        <TextField fx:id="companyVatin" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Ulice a č. p.*" />
-                        <TextField />
+                        <TextField fx:id="companyStreet" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Město*" />
-                        <TextField />
+                        <TextField fx:id="companyCity" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="PSČ*" />
-                        <TextField />
+                        <TextField fx:id="companyZipCode" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Stát*" />
-                        <TextField />
+                        <TextField fx:id="companyCountry" />
                      </children>
                   </HBox>
                </children>
@@ -79,31 +79,31 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Doklad č.*" />
-                        <TextField />
+                        <TextField fx:id="billNumber" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label disable="true" text="Cena celkem" />
-                        <TextField disable="true" />
+                        <TextField fx:id="priceSummary" disable="true" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label disable="true" text="Cena bez DPH" />
-                        <TextField disable="true" />
+                        <TextField fx:id="priceWithoutVatSummary" disable="true" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="275.0" spacing="10.0">
                      <children>
-                        <ComboBox disable="true" editable="true" prefHeight="25.0" prefWidth="135.0" promptText="sazba (%)" />
-                        <TextField disable="true" prefHeight="25.0" prefWidth="107.0" promptText="cena " />
+                        <ComboBox fx:id="vatRateSummary" disable="true" editable="true" prefHeight="25.0" prefWidth="135.0" promptText="sazba (%)" />
+                        <TextField fx:id="pricePerVatRateSummary" disable="true" prefHeight="25.0" prefWidth="107.0" promptText="cena " />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="275.0" spacing="10.0">
                      <children>
-                        <CheckBox disable="true" mnemonicParsing="false" selected="true" text="cena s DPH" />
+                        <CheckBox fx:id="pricePerVatRateSummaryWithVatCheckbox" disable="true" mnemonicParsing="false" selected="true" text="cena s DPH" />
                         <Button disable="true" mnemonicParsing="false" text="Přidat" />
                      </children>
                   </HBox>
@@ -121,37 +121,37 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Datum zápisu*" />
-                        <DatePicker />
+                        <DatePicker fx:id="billCreated" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Datum doručení*" />
-                        <DatePicker />
+                        <DatePicker fx:id="orderDelivered" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="DUZP*" />
-                        <DatePicker />
+                        <DatePicker fx:id="duzp" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Datum splatnosti*" />
-                        <DatePicker />
+                        <DatePicker fx:id="dueDate" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Metoda platby*" />
-                        <ComboBox prefHeight="25.0" prefWidth="175.0" />
+                        <ComboBox fx:id="paymentMethod" prefHeight="25.0" prefWidth="175.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="91.0" prefWidth="296.0" spacing="10.0">
                      <children>
                         <Label text="Popis" />
-                        <TextArea prefHeight="68.0" prefWidth="175.0" />
+                        <TextArea fx:id="billDescription" prefHeight="68.0" prefWidth="175.0" />
                      </children>
                   </HBox>
                </children>
@@ -173,8 +173,8 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="Čárový kód" />
-                        <TextField />
-                        <RadioButton mnemonicParsing="false" selected="true">
+                        <TextField fx:id="barcode" />
+                        <RadioButton fx:id="barcodeSelected" mnemonicParsing="false" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="searchParamRad" />
                            </toggleGroup>
@@ -184,8 +184,8 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="PLU" />
-                        <TextField disable="true" />
-                        <RadioButton mnemonicParsing="false" toggleGroup="$searchParamRad" />
+                        <TextField fx:id="plu" disable="true" />
+                        <RadioButton fx:id="pluSelected" mnemonicParsing="false" toggleGroup="$searchParamRad" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
@@ -204,14 +204,14 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="Množství" />
-                        <TextField text="1" />
+                        <TextField fx:id="quantity" text="1" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="Cena za jednotku s DPH" />
-                        <TextField />
-                        <RadioButton mnemonicParsing="false" selected="true">
+                        <TextField fx:id="pricePerUnitWithVat" />
+                        <RadioButton fx:id="pricePerUnitWithVatSelected" mnemonicParsing="false" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="priceTypeSelectRad" />
                            </toggleGroup>
@@ -221,14 +221,14 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="Cena za jednotku bez DPH" />
-                        <TextField disable="true" />
-                        <RadioButton mnemonicParsing="false" toggleGroup="$priceTypeSelectRad" />
+                        <TextField fx:id="pricePerUnitWithoutVat" disable="true" />
+                        <RadioButton fx:id="pricePerUnitWithoutVatSelected" mnemonicParsing="false" toggleGroup="$priceTypeSelectRad" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="sazba DPH" />
-                        <ComboBox editable="true" prefWidth="150.0" promptText="\%" />
+                        <ComboBox fx:id="vatRate" editable="true" prefWidth="150.0" promptText="\%" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -242,7 +242,7 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="400.0">
                      <children>
                         <Label text="Vybraná položka: " />
-                        <TextField editable="false" prefHeight="25.0" prefWidth="45.0" promptText="#" />
+                        <TextField fx:id="selectedItem" editable="false" prefHeight="25.0" prefWidth="45.0" promptText="#" />
                         <Button mnemonicParsing="false" text="Editovat" />
                         <Button mnemonicParsing="false" text="Odebrat" />
                      </children>

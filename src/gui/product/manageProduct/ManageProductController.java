@@ -122,9 +122,7 @@ public class ManageProductController implements Initializable{
 				return new SimpleObjectProperty<BigDecimal>(ph.getVatRate());
 			}
 		});
-		
-		//barcodes.setCellValueFactory(new PropertyValueFactory<Product, String>("barcodes.barcode"));
-		
+				
 		barcodes.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product,String>, ObservableValue<String>>() {
 
 			@Override
