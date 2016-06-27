@@ -18,17 +18,17 @@ public class VatRateSummary {
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="summary_without_vat", nullable=false, precision=9, scale=2)
+	private BigDecimal summaryWithoutVat;
+	
 	@Column(name="vat_rate", nullable=false, precision=5, scale=2)
 	private BigDecimal vatRate;
-	
-	@Column(name="summary_with_vat", nullable=false, precision=9, scale=2)
-	private BigDecimal summaryWithVat;
 	
 	@Column(name="vat_value", nullable=false, precision=9, scale=2)
 	private BigDecimal vatValue;
 	
-	@Column(name="summary_without_vat", nullable=false, precision=9, scale=2)
-	private BigDecimal summaryWithoutVat;
+	@Column(name="summary_with_vat", nullable=false, precision=9, scale=2)
+	private BigDecimal summaryWithVat;
 	
 	@ManyToOne
 	@JoinColumn(name="expense_id", nullable=true)
