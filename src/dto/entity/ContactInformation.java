@@ -37,10 +37,10 @@ public class ContactInformation {
 	@Column(name="street", nullable=false, length=150)
 	private String street;
 	
-	@Column(name="contact_phone_number", nullable=false, length=20)
+	@Column(name="contact_phone_number", nullable=true, length=20)
 	private String contactPhoneNumber;
 	
-	@Column(name="contact_email", nullable=false, length=100)
+	@Column(name="contact_email", nullable=true, length=100)
 	private String contactEmail;
 	
 	@Column(name="contact_person", nullable=true, length=120)
@@ -50,4 +50,121 @@ public class ContactInformation {
 	@JoinColumn(name="user_secondary_contact", nullable=true)
 	private User userSecondaryContact;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getContactPhoneNumber() {
+		return contactPhoneNumber;
+	}
+
+	public void setContactPhoneNumber(String contactPhoneNumber) {
+		this.contactPhoneNumber = contactPhoneNumber;
+	}
+
+	public String getContactEmail() {
+		return contactEmail;
+	}
+
+	public void setContactEmail(String contactEmail) {
+		this.contactEmail = contactEmail;
+	}
+
+	public String getContactPerson() {
+		return contactPerson;
+	}
+
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
+
+	public User getUserSecondaryContact() {
+		return userSecondaryContact;
+	}
+
+	public void setUserSecondaryContact(User userSecondaryContact) {
+		this.userSecondaryContact = userSecondaryContact;
+	}
+
+	public ContactInformation(Long id, String country, String zipCode, String city, String street,
+			String contactPhoneNumber, String contactEmail, String contactPerson, User userSecondaryContact) {
+		super();
+		this.id = id;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.street = street;
+		this.contactPhoneNumber = contactPhoneNumber;
+		this.contactEmail = contactEmail;
+		this.contactPerson = contactPerson;
+		this.userSecondaryContact = userSecondaryContact;
+	}
+
+	public ContactInformation(String country, String zipCode, String city, String street, String contactPhoneNumber,
+			String contactEmail, String contactPerson) {
+		super();
+		this.country = country;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.street = street;
+		this.contactPhoneNumber = contactPhoneNumber;
+		this.contactEmail = contactEmail;
+		this.contactPerson = contactPerson;
+	}
+
+	public ContactInformation(String country, String zipCode, String city, String street, String contactPhoneNumber,
+			String contactEmail, String contactPerson, User userSecondaryContact) {
+		super();
+		this.country = country;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.street = street;
+		this.contactPhoneNumber = contactPhoneNumber;
+		this.contactEmail = contactEmail;
+		this.contactPerson = contactPerson;
+		this.userSecondaryContact = userSecondaryContact;
+	}
+
+	public ContactInformation() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
 }

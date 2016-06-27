@@ -1,20 +1,33 @@
 package gui.expense.createExpense;
 
-import javafx.fxml.FXML;
+import java.io.IOException;
 
+import dto.entity.CompanyContact;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import service.expense.ExpenseService;
+import javafx.scene.control.Label;
 
 import javafx.scene.control.ComboBox;
 
 import javafx.scene.control.TextArea;
 
 import javafx.scene.control.RadioButton;
-
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 
 import javafx.scene.control.DatePicker;
+
+import javafx.scene.control.TableView;
+
+import javafx.scene.control.TableColumn;
 
 public class CreateExpenseController {
 	@FXML
@@ -46,6 +59,10 @@ public class CreateExpenseController {
 	@FXML
 	private CheckBox pricePerVatRateSummaryWithVatCheckbox;
 	@FXML
+	private TableColumn summaryTableVatRate;
+	@FXML
+	private TableColumn summaryTablePrice;
+	@FXML
 	private DatePicker billCreated;
 	@FXML
 	private DatePicker orderDelivered;
@@ -68,6 +85,8 @@ public class CreateExpenseController {
 	@FXML
 	private RadioButton pluSelected;
 	@FXML
+	private Label foundProduct;
+	@FXML
 	private TextField quantity;
 	@FXML
 	private TextField pricePerUnitWithVat;
@@ -83,7 +102,52 @@ public class CreateExpenseController {
 	private ComboBox vatRate;
 	@FXML
 	private TextField selectedItem;
+	@FXML
+	private TableView itemsTable;
+	@FXML
+	private TableColumn itemsTableRowId;
+	@FXML
+	private TableColumn itemsTablePlu;
+	@FXML
+	private TableColumn itemsTableName;
+	@FXML
+	private TableColumn itemsTableQuantity;
+	@FXML
+	private TableColumn itemsTablePricePerUnit;
+	@FXML
+	private TableColumn itemsTableWithVat;
+	@FXML
+	private TableColumn itemsTableVatRate;
+	@FXML
+	private TableColumn itemsTableSummaryPrice;
+	@FXML
+	private TableColumn itemsTableVatSum;
+	@FXML
+	private CheckBox saveSupplier;
+	
+	
+	public void createNewProduct(ActionEvent event){
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/gui/product/create/CreateProduct.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.initOwner(this.foundProduct.getScene().getWindow());
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveExpense(ActionEvent event){
+		ExpenseService expenseService = new ExpenseService();
+		CompanyContact cc = new CompanyContact(companyCountry.getText(),
+				companyZipCode.getText(), companyCity.getText(), companyStreet.getText(),
+				null, null, null, companyName.getText(), companyTin.getText(), companyVatin.getText());
+		
+	}
 
-	
-	
 }

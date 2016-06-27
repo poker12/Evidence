@@ -62,6 +62,137 @@ public class Expense {
 	
 	//in moment of creating expense, we can/have to joint it with entry of products
 	@OneToMany(mappedBy="expense", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<EntryOfGoods> entriesOfGoods; 
-	
+	private List<EntryOfGoods> entriesOfGoods;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public LocalDate getCreated() {
+		return created;
+	}
+
+	public void setCreated(LocalDate created) {
+		this.created = created;
+	}
+
+	public LocalDate getDateOfTaxableSupply() {
+		return dateOfTaxableSupply;
+	}
+
+	public void setDateOfTaxableSupply(LocalDate dateOfTaxableSupply) {
+		this.dateOfTaxableSupply = dateOfTaxableSupply;
+	}
+
+	public LocalDate getDue_date() {
+		return due_date;
+	}
+
+	public void setDue_date(LocalDate due_date) {
+		this.due_date = due_date;
+	}
+
+	public String getMethodOfPayment() {
+		return methodOfPayment;
+	}
+
+	public void setMethodOfPayment(String methodOfPayment) {
+		this.methodOfPayment = methodOfPayment;
+	}
+
+	public BigDecimal getSummaryPrice() {
+		return summaryPrice;
+	}
+
+	public void setSummaryPrice(BigDecimal summaryPrice) {
+		this.summaryPrice = summaryPrice;
+	}
+
+	public List<VatRateSummary> getVatRatesAndSummaries() {
+		return vatRatesAndSummaries;
+	}
+
+	public void setVatRatesAndSummaries(List<VatRateSummary> vatRatesAndSummaries) {
+		this.vatRatesAndSummaries = vatRatesAndSummaries;
+	}
+
+	public CompanyContact getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(CompanyContact supplier) {
+		this.supplier = supplier;
+	}
+
+	public List<ExpenseItem> getExpenseItems() {
+		return expenseItems;
+	}
+
+	public void setExpenseItems(List<ExpenseItem> expenseItems) {
+		this.expenseItems = expenseItems;
+	}
+
+	public ExpenseCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(ExpenseCategory category) {
+		this.category = category;
+	}
+
+	public List<EntryOfGoods> getEntriesOfGoods() {
+		return entriesOfGoods;
+	}
+
+	public void setEntriesOfGoods(List<EntryOfGoods> entriesOfGoods) {
+		this.entriesOfGoods = entriesOfGoods;
+	}
+
+	public Expense(Long id, String description, LocalDate created, LocalDate dateOfTaxableSupply, LocalDate due_date,
+			String methodOfPayment, BigDecimal summaryPrice, List<VatRateSummary> vatRatesAndSummaries,
+			CompanyContact supplier, List<ExpenseItem> expenseItems, ExpenseCategory category,
+			List<EntryOfGoods> entriesOfGoods) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.created = created;
+		this.dateOfTaxableSupply = dateOfTaxableSupply;
+		this.due_date = due_date;
+		this.methodOfPayment = methodOfPayment;
+		this.summaryPrice = summaryPrice;
+		this.vatRatesAndSummaries = vatRatesAndSummaries;
+		this.supplier = supplier;
+		this.expenseItems = expenseItems;
+		this.category = category;
+		this.entriesOfGoods = entriesOfGoods;
+	}
+
+	public Expense(String description, LocalDate created, LocalDate dateOfTaxableSupply, LocalDate due_date,
+			String methodOfPayment, BigDecimal summaryPrice, List<VatRateSummary> vatRatesAndSummaries,
+			CompanyContact supplier, ExpenseCategory category, List<EntryOfGoods> entriesOfGoods) {
+		super();
+		this.description = description;
+		this.created = created;
+		this.dateOfTaxableSupply = dateOfTaxableSupply;
+		this.due_date = due_date;
+		this.methodOfPayment = methodOfPayment;
+		this.summaryPrice = summaryPrice;
+		this.vatRatesAndSummaries = vatRatesAndSummaries;
+		this.supplier = supplier;
+		this.category = category;
+		this.entriesOfGoods = entriesOfGoods;
+	} 
+
 }
