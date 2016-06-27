@@ -211,6 +211,10 @@ public class Product {
 	public void setEntriesOfGoods(List<EntryOfGoods> entriesOfGoods) {
 		this.entriesOfGoods = entriesOfGoods;
 	}
-	
+
+	@Override
+	public String toString() {
+		return id + " | " + name;
+	}
 	
 }

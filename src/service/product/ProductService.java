@@ -21,4 +21,16 @@ public class ProductService {
 		ProductDao pd = new ProductDao();
 		return pd.getAll();
 	}
+	
+	public Product findByPlu(Long plu){
+		ProductDao dao = new ProductDao();
+		Product product = dao.findById(plu);
+		return product;
+	}
+	
+	public List<Product> findProductsByBarcode(String barcode){
+		ProductDao dao = new ProductDao();
+		List<Product> products = dao.findProductsByBarcode(barcode);
+		return products;
+	}
 }

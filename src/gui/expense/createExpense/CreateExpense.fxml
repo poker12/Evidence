@@ -74,7 +74,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <CheckBox fx:id="saveSupplier" mnemonicParsing="false" selected="true" text="Uložit jako dodavatele" />
+                        <CheckBox fx:id="saveSupplier" mnemonicParsing="false" text="Uložit jako dodavatele" />
                      </children>
                   </HBox>
                </children>
@@ -173,7 +173,7 @@
                      <children>
                         <Label text="Vybrat ze seznamu" />
                         <ComboBox fx:id="productList" prefWidth="150.0" promptText="Vybrat" />
-                        <RadioButton fx:id="inListSelected" mnemonicParsing="false" selected="true">
+                        <RadioButton fx:id="inListSelected" mnemonicParsing="false" onAction="#changeFindingCriteria" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="searchParamRad" />
                            </toggleGroup>
@@ -184,26 +184,26 @@
                      <children>
                         <Label text="Vyhledat podle čárového kódu" />
                         <TextField fx:id="barcode" disable="true" />
-                        <RadioButton fx:id="barcodeSelected" mnemonicParsing="false" toggleGroup="$searchParamRad" />
+                        <RadioButton fx:id="barcodeSelected" mnemonicParsing="false" onAction="#changeFindingCriteria" toggleGroup="$searchParamRad" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="Vyhledat podle PLU" />
                         <TextField fx:id="plu" disable="true" />
-                        <RadioButton fx:id="pluSelected" mnemonicParsing="false" toggleGroup="$searchParamRad" />
+                        <RadioButton fx:id="pluSelected" mnemonicParsing="false" onAction="#changeFindingCriteria" toggleGroup="$searchParamRad" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="Najít produkt" />
-                        <Button mnemonicParsing="false" text="Hledat" />
+                        <Button mnemonicParsing="false" onAction="#findProduct" text="Hledat" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
                         <Label text="Nalezený produkt: " />
-                        <Label fx:id="foundProduct" text="-" wrapText="true" />
+                        <Label fx:id="foundProductLabel" text="-" wrapText="true" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -217,7 +217,7 @@
                      <children>
                         <Label text="Cena za jednotku s DPH" />
                         <TextField fx:id="pricePerUnitWithVat" />
-                        <RadioButton fx:id="pricePerUnitWithVatSelected" mnemonicParsing="false" selected="true">
+                        <RadioButton fx:id="pricePerUnitWithVatSelected" mnemonicParsing="false" onAction="#changePriceType" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="priceTypeSelectRad" />
                            </toggleGroup>
@@ -228,7 +228,7 @@
                      <children>
                         <Label text="Cena za jednotku bez DPH" />
                         <TextField fx:id="pricePerUnitWithoutVat" disable="true" />
-                        <RadioButton fx:id="pricePerUnitWithoutVatSelected" mnemonicParsing="false" toggleGroup="$priceTypeSelectRad" />
+                        <RadioButton fx:id="pricePerUnitWithoutVatSelected" mnemonicParsing="false" onAction="#changePriceType" toggleGroup="$priceTypeSelectRad" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
@@ -240,7 +240,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Přidat" />
+                        <Button mnemonicParsing="false" onAction="#addProductToExpenseList" text="Přidat" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -269,7 +269,7 @@
             </TableView>
          </items>
       </SplitPane>
-      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Uložit" />
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveExpense" text="Uložit" />
       <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Storno" />
    </children>
 </VBox>

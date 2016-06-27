@@ -1,26 +1,46 @@
 package gui.expense.createExpense;
 
+import java.awt.Component;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
+
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
 import dto.entity.CompanyContact;
 import dto.entity.EntryOfGoods;
 import dto.entity.Expense;
 import dto.entity.Product;
 import dto.entity.VatRateSummary;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import service.expense.ExpenseService;
+import service.product.ProductService;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ComboBox;
 
 import javafx.scene.control.TextArea;
@@ -36,7 +56,8 @@ import javafx.scene.control.TableView;
 
 import javafx.scene.control.TableColumn;
 
-public class CreateExpenseController {
+public class CreateExpenseController implements Initializable{
+	
 	@FXML
 	private ComboBox<CompanyContact> selectedCompany;
 	@FXML
@@ -90,7 +111,7 @@ public class CreateExpenseController {
 	@FXML
 	private RadioButton pluSelected;
 	@FXML
-	private Label foundProduct;
+	private Label foundProductLabel;
 	@FXML
 	private TextField quantity;
 	@FXML
@@ -108,35 +129,95 @@ public class CreateExpenseController {
 	@FXML
 	private TextField selectedItem;
 	@FXML
-	private TableView itemsTable;
+	private TableView<EntryOfGoods> itemsTable;
 	@FXML
-	private TableColumn itemsTableRowId;
+	private TableColumn<EntryOfGoods, Integer> itemsTableRowId;
 	@FXML
-	private TableColumn itemsTablePlu;
+	private TableColumn<EntryOfGoods, Long> itemsTablePlu;
 	@FXML
-	private TableColumn itemsTableName;
+	private TableColumn<EntryOfGoods, String> itemsTableName;
 	@FXML
-	private TableColumn itemsTableQuantity;
+	private TableColumn<EntryOfGoods, Long> itemsTableQuantity;
 	@FXML
-	private TableColumn itemsTablePricePerUnit;
+	private TableColumn<EntryOfGoods, BigDecimal> itemsTablePricePerUnit;
 	@FXML
-	private TableColumn itemsTableWithVat;
+	private TableColumn<EntryOfGoods, Boolean> itemsTableWithVat;
 	@FXML
-	private TableColumn itemsTableVatRate;
+	private TableColumn<EntryOfGoods, BigDecimal> itemsTableVatRate;
 	@FXML
-	private TableColumn itemsTableSummaryPrice;
+	private TableColumn<EntryOfGoods, BigDecimal> itemsTableSummaryPrice;
 	@FXML
-	private TableColumn itemsTableVatSum;
+	private TableColumn<EntryOfGoods, BigDecimal> itemsTableVatSum;
 	@FXML
 	private CheckBox saveSupplier;
 	@FXML
 	private ComboBox<Product> productList;
 	@FXML
-	private CheckBox inListSelected;
+	private RadioButton inListSelected;
 	
 	private BigDecimal expensePriceSummary = new BigDecimal(0);
-	private List<EntryOfGoods> entryOfGoods = new ArrayList<>();
-	private List<VatRateSummary> vatRateSummaries = new ArrayList<>();
+	private ObservableList<EntryOfGoods> entryOfGoods = FXCollections.observableArrayList();
+	private ObservableList<VatRateSummary> vatRateSummaries = FXCollections.observableArrayList();
+	private Product foundProduct = null;
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ProductService productService = new ProductService();
+		productList.setCellFactory(new Callback<ListView<Product>, ListCell<Product>>() {
+			
+			@Override
+			public ListCell<Product> call(ListView<Product> param) {
+				return new ListCell<Product>(){
+
+					@Override
+					protected void updateItem(Product arg0, boolean arg1) {
+						// TODO Auto-generated method stub
+						super.updateItem(arg0, arg1);
+						if(arg0 != null)
+							setText(arg0.getId() + " | " + arg0.getName() + " | " + arg0.getCategory().getName());
+						else
+							setText(null);
+					}
+					
+				};
+			}
+		});
+		productList.getItems().addAll(productService.getAll());
+		
+		itemsTableRowId.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Integer>(itemsTable.getItems().indexOf(column.getValue())));
+		itemsTablePlu.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, Long>("id"));
+		itemsTableName.setCellValueFactory(column -> new ReadOnlyStringWrapper(column.getValue().getProduct().getName()));
+		itemsTableQuantity.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, Long>("productQuantity"));
+		itemsTablePricePerUnit.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, BigDecimal>("pricePerPiece"));
+		itemsTableWithVat.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, Boolean>("withVat"));
+		itemsTableVatRate.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, BigDecimal>("vatRate"));
+		itemsTableSummaryPrice.setCellValueFactory(
+				column -> {
+					EntryOfGoods eog = column.getValue();
+					if(eog.getWithVat()){
+						return new ReadOnlyObjectWrapper<BigDecimal>((eog.getPricePerPiece()
+								.divide((eog.getVatRate().add(new BigDecimal(100)).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP)), 2, RoundingMode.HALF_UP))
+								.multiply(new BigDecimal(eog.getProductQuantity())).setScale(2, RoundingMode.HALF_UP));
+					}
+					return new ReadOnlyObjectWrapper<BigDecimal>(eog.getPricePerPiece()
+							.multiply(new BigDecimal(eog.getProductQuantity())).setScale(2, RoundingMode.HALF_UP));
+				});
+		itemsTableVatSum.setCellValueFactory(
+				column -> {
+					EntryOfGoods eog = column.getValue();
+					if(eog.getWithVat()){
+						return new ReadOnlyObjectWrapper<BigDecimal>((eog.getPricePerPiece()
+								.divide((eog.getVatRate().add(new BigDecimal(100)).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP)), 2, RoundingMode.HALF_UP))
+								.multiply(new BigDecimal(eog.getProductQuantity())).multiply(eog.getVatRate().divide(new BigDecimal(100), 2, RoundingMode.HALF_UP))
+								.setScale(2, RoundingMode.HALF_UP));
+					}
+					return new ReadOnlyObjectWrapper<BigDecimal>(eog.getPricePerPiece()
+							.multiply(new BigDecimal(eog.getProductQuantity())).multiply(eog.getVatRate().divide(new BigDecimal(100), 2, RoundingMode.HALF_UP))
+							.setScale(2, RoundingMode.HALF_UP));
+				});
+		
+		itemsTable.setItems(entryOfGoods);
+	}
 	
 	public void createNewProduct(ActionEvent event){
 		Parent root;
@@ -145,7 +226,7 @@ public class CreateExpenseController {
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.setScene(scene);
-			stage.initOwner(this.foundProduct.getScene().getWindow());
+			stage.initOwner(this.foundProductLabel.getScene().getWindow());
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
 		} catch (IOException e) {
@@ -160,9 +241,125 @@ public class CreateExpenseController {
 				companyZipCode.getText(), companyCity.getText(), companyStreet.getText(),
 				null, null, null, companyName.getText(), companyTin.getText(), companyVatin.getText(), saveSupplier.isSelected());
 		Expense expense = new Expense(billDescription.getText(), billCreated.getValue(), dateOfTaxableSupply.getValue(), dueDate.getValue(),
-				paymentMethod.getValue(), expensePriceSummary, orderDelivered.getValue(), "zbozi", vatRateSummaries,
+				paymentMethod.getEditor().getText(), expensePriceSummary, orderDelivered.getValue(), "zbozi", vatRateSummaries,
 				companyContact, entryOfGoods);
 		expenseService.persist(expense);
 	}
 
+	public void findProduct(ActionEvent event){
+		ProductService productService = new ProductService();
+		if(inListSelected.isSelected()){
+			foundProduct = productList.getValue();
+			if(foundProduct != null)
+				foundProductLabel.setText(foundProduct.getId() + " | " + foundProduct.getName() + " | " + foundProduct.getCategory().getName());
+			else
+				foundProductLabel.setText("Nebyl vybrán produkt");
+		}
+		else if(barcodeSelected.isSelected()){
+			List<Product> products = productService.findProductsByBarcode(barcode.getText());
+			if(!products.isEmpty()){
+				foundProduct = products.get(0);
+				foundProductLabel.setText(foundProduct.getId() + " | " + foundProduct.getName() + " | " + foundProduct.getCategory().getName());
+			}
+			else
+				foundProductLabel.setText("Nenalezeno");
+		}
+		else if(pluSelected.isSelected()){
+			foundProduct = productService.findByPlu(Long.valueOf(plu.getText()));
+			if(foundProduct != null){
+				foundProductLabel.setText(foundProduct.getId() + " | " + foundProduct.getName() + " | " + foundProduct.getCategory().getName());
+			}
+			else
+				foundProductLabel.setText("Nenalezeno");
+		}
+		else{
+			foundProductLabel.setText("-");
+		}
+		if(foundProduct != null)
+			quantity.requestFocus();
+	}
+	
+	public void changeFindingCriteria(ActionEvent event){
+		if(inListSelected.isSelected()){
+			productList.setDisable(false);
+			productList.requestFocus();
+			barcode.setDisable(true);
+			plu.setDisable(true);
+			productList.setValue(null);
+			barcode.setText("");
+			plu.setText("");
+		}
+		else if(barcodeSelected.isSelected()){
+			productList.setDisable(true);
+			barcode.setDisable(false);
+			barcode.requestFocus();
+			plu.setDisable(true);
+			productList.setValue(null);
+			barcode.setText("");
+			plu.setText("");
+		}
+		else{
+			productList.setDisable(true);
+			barcode.setDisable(true);
+			plu.setDisable(false);
+			plu.requestFocus();
+			productList.setValue(null);
+			barcode.setText("");
+			plu.setText("");
+		}
+	}
+	
+	public void changePriceType(ActionEvent event){
+		if(pricePerUnitWithVatSelected.isSelected()){
+			pricePerUnitWithVat.setDisable(false);
+			pricePerUnitWithVat.requestFocus();
+			pricePerUnitWithVat.setText("");
+			pricePerUnitWithoutVat.setDisable(true);
+			pricePerUnitWithoutVat.setText("");
+		}
+		else{
+			pricePerUnitWithVat.setDisable(true);
+			pricePerUnitWithVat.setText("");
+			pricePerUnitWithoutVat.setDisable(false);
+			pricePerUnitWithoutVat.requestFocus();
+			pricePerUnitWithoutVat.setText("");
+		}
+	}
+	
+	public void addProductToExpenseList(ActionEvent event){
+		if(foundProduct == null)
+			return;
+		BigDecimal price;
+		Boolean withVat;
+		if(pricePerUnitWithoutVatSelected.isSelected()){
+			price = new BigDecimal(pricePerUnitWithoutVat.getText());
+			withVat = false;
+		}
+		else{
+			price = new BigDecimal(pricePerUnitWithVat.getText());
+			withVat = true;
+		}
+		EntryOfGoods eog = new EntryOfGoods(Long.valueOf(quantity.getText()),
+				price, new BigDecimal(vatRate.getEditor().getText()), withVat, foundProduct);
+		entryOfGoods.add(eog);
+		quantity.setText("1");
+		pricePerUnitWithoutVat.setText("");
+		pricePerUnitWithVat.setText("");
+		vatRate.setValue(null);
+		vatRate.getEditor().setText("");
+		
+		/*System.out.println(itemsTable.getColumns().get(0).getCellData(0));
+		System.out.println(itemsTable.getColumns().get(1).getCellData(0));
+		System.out.println(itemsTable.getColumns().get(2).getCellData(0));
+		System.out.println(itemsTable.getColumns().get(3).getCellData(0));
+		System.out.println(itemsTable.getColumns().get(4).getCellData(0));
+		System.out.println(itemsTable.getColumns().get(5).getCellData(0));
+		System.out.println(itemsTable.getColumns().get(6).getCellData(0));
+		System.out.println(itemsTable.getColumns().get(7).getCellData(0));
+		System.out.println(itemsTable.getColumns().get(8).getCellData(0));
+		
+		for(EntryOfGoods e : entryOfGoods){
+			System.out.println(e.toString());
+		}*/
+	}
 }

@@ -44,4 +44,110 @@ public class EntryOfGoods {
 	@JoinColumn(name="expense_id", nullable=false)
 	private Expense expense;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getProductQuantity() {
+		return productQuantity;
+	}
+
+	public void setProductQuantity(Long productQuantity) {
+		this.productQuantity = productQuantity;
+	}
+
+	public BigDecimal getPricePerPiece() {
+		return pricePerPiece;
+	}
+
+	public void setPricePerPiece(BigDecimal pricePerPiece) {
+		this.pricePerPiece = pricePerPiece;
+	}
+
+	public BigDecimal getVatRate() {
+		return vatRate;
+	}
+
+	public void setVatRate(BigDecimal vatRate) {
+		this.vatRate = vatRate;
+	}
+
+	public Boolean getWithVat() {
+		return withVat;
+	}
+
+	public void setWithVat(Boolean withVat) {
+		this.withVat = withVat;
+	}
+
+	public LocalDateTime getAdded() {
+		return added;
+	}
+
+	public void setAdded(LocalDateTime added) {
+		this.added = added;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Expense getExpense() {
+		return expense;
+	}
+
+	public void setExpense(Expense expense) {
+		this.expense = expense;
+	}
+
+	public EntryOfGoods(Long id, Long productQuantity, BigDecimal pricePerPiece, BigDecimal vatRate, Boolean withVat,
+			LocalDateTime added, Product product, Expense expense) {
+		super();
+		this.id = id;
+		this.productQuantity = productQuantity;
+		this.pricePerPiece = pricePerPiece;
+		this.vatRate = vatRate;
+		this.withVat = withVat;
+		this.added = added;
+		this.product = product;
+		this.expense = expense;
+	}
+
+	public EntryOfGoods(Long productQuantity, BigDecimal pricePerPiece, BigDecimal vatRate, Boolean withVat,
+			Product product, Expense expense) {
+		super();
+		this.productQuantity = productQuantity;
+		this.pricePerPiece = pricePerPiece;
+		this.vatRate = vatRate;
+		this.withVat = withVat;
+		this.product = product;
+		this.expense = expense;
+	}
+
+	public EntryOfGoods(Long productQuantity, BigDecimal pricePerPiece, BigDecimal vatRate, Boolean withVat,
+			Product product) {
+		super();
+		this.productQuantity = productQuantity;
+		this.pricePerPiece = pricePerPiece;
+		this.vatRate = vatRate;
+		this.withVat = withVat;
+		this.product = product;
+	}
+
+	@Override
+	public String toString() {
+		return "EntryOfGoods [id=" + id + ", productQuantity=" + productQuantity + ", pricePerPiece=" + pricePerPiece
+				+ ", vatRate=" + vatRate + ", withVat=" + withVat + ", added=" + added + ", product=" + product
+				+ ", expense=" + expense + "]";
+	}
+	
+	
 }
