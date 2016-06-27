@@ -27,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import service.product.ProductService;
@@ -150,6 +151,8 @@ public class ManageProductController implements Initializable{
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.setScene(scene);
+			stage.initOwner(this.paneProduct.getScene().getWindow());
+			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
