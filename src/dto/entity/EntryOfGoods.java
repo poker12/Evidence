@@ -23,16 +23,15 @@ public class EntryOfGoods {
 	private Long productQuantity;
 	
 	//price from expense
-	@Column(name="price_per_piece_with_vat", nullable=true, precision=10, scale=2)
-	private BigDecimal pricePerPieceWithVat;
-	
-	//price from expense
-	@Column(name="price_per_piece_without_vat", nullable=true, precision=10, scale=2)
-	private BigDecimal pricePerPieceWithoutVat;
+	@Column(name="price_per_piece", nullable=false, precision=10, scale=2)
+	private BigDecimal pricePerPiece;
 	
 	//value from expense
-	@Column(name="vat_rate", nullable=true, precision=5, scale=2)
+	@Column(name="vat_rate", nullable=false, precision=5, scale=2)
 	private BigDecimal vatRate;
+	
+	@Column(name="with_vat", nullable=false)
+	private Boolean withVat;
 	
 	@Column(name="added", nullable=false, insertable=false, columnDefinition="datetime default now()")
 	private LocalDateTime added;

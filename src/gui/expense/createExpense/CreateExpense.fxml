@@ -26,7 +26,7 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Dodavatel" />
-                        <ComboBox fx:id="selectedCompany" prefHeight="25.0" prefWidth="139.0" promptText="Vybrat" />
+                        <ComboBox fx:id="selectedCompany" prefHeight="25.0" prefWidth="148.0" promptText="Vybrat" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -89,20 +89,14 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label disable="true" text="Cena celkem" />
-                        <TextField fx:id="priceSummary" disable="true" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
-                     <children>
-                        <Label disable="true" text="Cena bez DPH" />
-                        <TextField fx:id="priceWithoutVatSummary" disable="true" />
+                        <Label text="Cena s DPH celkem" />
+                        <TextField fx:id="priceSummary" editable="false" promptText="0" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="275.0" spacing="10.0">
                      <children>
-                        <ComboBox fx:id="vatRateSummary" disable="true" editable="true" prefHeight="25.0" prefWidth="135.0" promptText="sazba (%)" />
+                        <ComboBox fx:id="vatRatePerSummary" disable="true" editable="true" prefHeight="25.0" prefWidth="135.0" promptText="sazba (%)" />
                         <TextField fx:id="pricePerVatRateSummary" disable="true" prefHeight="25.0" prefWidth="107.0" promptText="cena " />
                      </children>
                   </HBox>
@@ -112,10 +106,10 @@
                         <Button disable="true" mnemonicParsing="false" text="Přidat" />
                      </children>
                   </HBox>
-                  <TableView prefHeight="99.0" prefWidth="275.0">
+                  <TableView fx:id="summaryTable" prefHeight="99.0" prefWidth="275.0">
                     <columns>
-                      <TableColumn fx:id="summaryTableVatRate" prefWidth="145.0" text="sazba" />
-                      <TableColumn fx:id="summaryTablePrice" prefWidth="137.0" text="cena" />
+                      <TableColumn fx:id="summaryTableVatRate" prefWidth="203.0" text="sazba" />
+                      <TableColumn fx:id="summaryTablePrice" prefWidth="193.0" text="cena" />
                     </columns>
                   </TableView>
                   <Button disable="true" mnemonicParsing="false" text="Odebrat" />
@@ -125,7 +119,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="Datum zápisu*" />
+                        <Label text="Datum vystavení*" />
                         <DatePicker fx:id="billCreated" />
                      </children>
                   </HBox>
@@ -137,8 +131,8 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
-                        <Label text="DUZP*" />
-                        <DatePicker fx:id="duzp" />
+                        <Label text="Datum zdanitelného plnění" />
+                        <DatePicker fx:id="dateOfTaxableSupply" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
@@ -150,7 +144,7 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Metoda platby*" />
-                        <ComboBox fx:id="paymentMethod" prefHeight="25.0" prefWidth="175.0" />
+                        <ComboBox fx:id="paymentMethod" editable="true" prefHeight="25.0" prefWidth="175.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="91.0" prefWidth="296.0" spacing="10.0">
@@ -164,7 +158,7 @@
          </items>
       </SplitPane>
       <Separator prefWidth="200.0" />
-      <SplitPane dividerPositions="0.33" prefHeight="327.0" prefWidth="880.0">
+      <SplitPane dividerPositions="0.33" prefHeight="347.0" prefWidth="1223.0">
          <items>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -177,9 +171,9 @@
                   <Separator prefWidth="200.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
-                        <Label text="Čárový kód" />
-                        <TextField fx:id="barcode" />
-                        <RadioButton fx:id="barcodeSelected" mnemonicParsing="false" selected="true">
+                        <Label text="Vybrat ze seznamu" />
+                        <ComboBox fx:id="productList" prefWidth="150.0" promptText="Vybrat" />
+                        <RadioButton fx:id="inListSelected" mnemonicParsing="false" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="searchParamRad" />
                            </toggleGroup>
@@ -188,7 +182,14 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
-                        <Label text="PLU" />
+                        <Label text="Vyhledat podle čárového kódu" />
+                        <TextField fx:id="barcode" disable="true" />
+                        <RadioButton fx:id="barcodeSelected" mnemonicParsing="false" toggleGroup="$searchParamRad" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
+                     <children>
+                        <Label text="Vyhledat podle PLU" />
                         <TextField fx:id="plu" disable="true" />
                         <RadioButton fx:id="pluSelected" mnemonicParsing="false" toggleGroup="$searchParamRad" />
                      </children>
@@ -239,7 +240,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="436.0" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Přídat" />
+                        <Button mnemonicParsing="false" text="Přidat" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -257,12 +258,12 @@
               <columns>
                 <TableColumn fx:id="itemsTableRowId" prefWidth="23.0" text="#" />
                 <TableColumn fx:id="itemsTablePlu" prefWidth="67.0" text="PLU" />
-                  <TableColumn fx:id="itemsTableName" prefWidth="271.0" text="název" />
-                  <TableColumn fx:id="itemsTableQuantity" prefWidth="59.0" text="množství" />
-                  <TableColumn fx:id="itemsTablePricePerUnit" prefWidth="107.0" text="cena za jednotku" />
-                  <TableColumn fx:id="itemsTableWithVat" prefWidth="42.0" text="s DPH" />
-                  <TableColumn fx:id="itemsTableVatRate" prefWidth="69.0" text="sazba DPH" />
-                  <TableColumn fx:id="itemsTableSummaryPrice" prefWidth="99.0" text="částka" />
+                  <TableColumn fx:id="itemsTableName" prefWidth="251.0" text="název" />
+                  <TableColumn fx:id="itemsTableQuantity" prefWidth="58.0" text="množství" />
+                  <TableColumn fx:id="itemsTablePricePerUnit" prefWidth="100.0" text="cena za jednotku" />
+                  <TableColumn fx:id="itemsTableWithVat" prefWidth="44.0" text="s DPH" />
+                  <TableColumn fx:id="itemsTableVatRate" prefWidth="99.0" text="sazba DPH (%)" />
+                  <TableColumn fx:id="itemsTableSummaryPrice" prefWidth="95.0" text="částka" />
                   <TableColumn fx:id="itemsTableVatSum" prefWidth="78.0" text="DPH" />
               </columns>
             </TableView>

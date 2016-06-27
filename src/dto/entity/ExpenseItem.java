@@ -21,14 +21,14 @@ public class ExpenseItem{
 	@Column(name="name", nullable=true, length=100)
 	private String name;
 	
-	@Column(name="price_with_vat", nullable=true, precision=10, scale=2)
-	private BigDecimal priceWithVat;
-	
-	@Column(name="price_without_vat", nullable=true, precision=10, scale=2)
-	private BigDecimal priceWithoutVat;
+	@Column(name="price", nullable=true, precision=10, scale=2)
+	private BigDecimal price;
 	
 	@Column(name="vat_rate", nullable=false, precision=5, scale=2)
 	private BigDecimal vatRate;
+	
+	@Column(name="with_vat", nullable=false)
+	private Boolean withVat;
 	
 	@ManyToOne
 	@JoinColumn(name="expense_id", nullable=false)

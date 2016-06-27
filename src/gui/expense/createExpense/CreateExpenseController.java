@@ -1,8 +1,15 @@
 package gui.expense.createExpense;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import dto.entity.CompanyContact;
+import dto.entity.EntryOfGoods;
+import dto.entity.Expense;
+import dto.entity.Product;
+import dto.entity.VatRateSummary;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +38,7 @@ import javafx.scene.control.TableColumn;
 
 public class CreateExpenseController {
 	@FXML
-	private ComboBox selectedCompany;
+	private ComboBox<CompanyContact> selectedCompany;
 	@FXML
 	private TextField companyName;
 	@FXML
@@ -51,9 +58,7 @@ public class CreateExpenseController {
 	@FXML
 	private TextField priceSummary;
 	@FXML
-	private TextField priceWithoutVatSummary;
-	@FXML
-	private ComboBox vatRateSummary;
+	private ComboBox<VatRateSummary> vatRatePerSummary;
 	@FXML
 	private TextField pricePerVatRateSummary;
 	@FXML
@@ -67,11 +72,11 @@ public class CreateExpenseController {
 	@FXML
 	private DatePicker orderDelivered;
 	@FXML
-	private DatePicker duzp;
+	private DatePicker dateOfTaxableSupply;
 	@FXML
 	private DatePicker dueDate;
 	@FXML
-	private ComboBox paymentMethod;
+	private ComboBox<String> paymentMethod;
 	@FXML
 	private TextArea billDescription;
 	@FXML
@@ -99,7 +104,7 @@ public class CreateExpenseController {
 	@FXML
 	private RadioButton pricePerUnitWithoutVatSelected;
 	@FXML
-	private ComboBox vatRate;
+	private ComboBox<BigDecimal> vatRate;
 	@FXML
 	private TextField selectedItem;
 	@FXML
@@ -124,7 +129,14 @@ public class CreateExpenseController {
 	private TableColumn itemsTableVatSum;
 	@FXML
 	private CheckBox saveSupplier;
+	@FXML
+	private ComboBox<Product> productList;
+	@FXML
+	private CheckBox inListSelected;
 	
+	private BigDecimal expensePriceSummary = new BigDecimal(0);
+	private List<EntryOfGoods> entryOfGoods = new ArrayList<>();
+	private List<VatRateSummary> vatRateSummaries = new ArrayList<>();
 	
 	public void createNewProduct(ActionEvent event){
 		Parent root;
@@ -144,10 +156,13 @@ public class CreateExpenseController {
 	
 	public void saveExpense(ActionEvent event){
 		ExpenseService expenseService = new ExpenseService();
-		CompanyContact cc = new CompanyContact(companyCountry.getText(),
+		CompanyContact companyContact = new CompanyContact(companyCountry.getText(),
 				companyZipCode.getText(), companyCity.getText(), companyStreet.getText(),
-				null, null, null, companyName.getText(), companyTin.getText(), companyVatin.getText());
-		
+				null, null, null, companyName.getText(), companyTin.getText(), companyVatin.getText(), saveSupplier.isSelected());
+		Expense expense = new Expense(billDescription.getText(), billCreated.getValue(), dateOfTaxableSupply.getValue(), dueDate.getValue(),
+				paymentMethod.getValue(), expensePriceSummary, orderDelivered.getValue(), "zbozi", vatRateSummaries,
+				companyContact, entryOfGoods);
+		expenseService.persist(expense);
 	}
 
 }

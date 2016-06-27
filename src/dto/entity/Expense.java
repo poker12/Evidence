@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -34,7 +33,7 @@ public class Expense {
 	private LocalDate created; //day when bill was created
 	
 	@Column(name="date_of_taxable_supply", nullable=false)
-	private LocalDate dateOfTaxableSupply; //day, when service/product was delivered
+	private LocalDate dateOfTaxableSupply; //day of taxable supply (mostly same as delivered date)
 	
 	@Column(name="due_date", nullable=false)
 	private LocalDate due_date; //last day, when bill can be paid
@@ -44,6 +43,12 @@ public class Expense {
 	
 	@Column(name="summary_price", nullable=false, precision=10, scale=2)
 	private BigDecimal summaryPrice; //summarized price with VAT 
+	
+	@Column(name="delivered", nullable=true)
+	private LocalDate delivered;//day, when goods were delivered
+	
+	@Column(name="kind_of_expense", length=30, nullable=false)
+	private String kindOfExpense;
 	
 	//Expense can has more item-vat-categories. We must know about all their summaries
 	@OneToMany(mappedBy="expense", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
@@ -55,11 +60,7 @@ public class Expense {
 	
 	@OneToMany(mappedBy="expense", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<ExpenseItem> expenseItems; //when we need create sub-bill from original bill
-	
-	@ManyToOne
-	@JoinColumn(name="expense_category_id", nullable=false)
-	private ExpenseCategory category;
-	
+		
 	//in moment of creating expense, we can/have to joint it with entry of products
 	@OneToMany(mappedBy="expense", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<EntryOfGoods> entriesOfGoods;
@@ -144,14 +145,6 @@ public class Expense {
 		this.expenseItems = expenseItems;
 	}
 
-	public ExpenseCategory getCategory() {
-		return category;
-	}
-
-	public void setCategory(ExpenseCategory category) {
-		this.category = category;
-	}
-
 	public List<EntryOfGoods> getEntriesOfGoods() {
 		return entriesOfGoods;
 	}
@@ -160,10 +153,25 @@ public class Expense {
 		this.entriesOfGoods = entriesOfGoods;
 	}
 
+	public LocalDate getDelivered() {
+		return delivered;
+	}
+
+	public void setDelivered(LocalDate delivered) {
+		this.delivered = delivered;
+	}
+
+	public String getKindOfExpense() {
+		return kindOfExpense;
+	}
+
+	public void setKindOfExpense(String kindOfExpense) {
+		this.kindOfExpense = kindOfExpense;
+	}
+
 	public Expense(Long id, String description, LocalDate created, LocalDate dateOfTaxableSupply, LocalDate due_date,
-			String methodOfPayment, BigDecimal summaryPrice, List<VatRateSummary> vatRatesAndSummaries,
-			CompanyContact supplier, List<ExpenseItem> expenseItems, ExpenseCategory category,
-			List<EntryOfGoods> entriesOfGoods) {
+			String methodOfPayment, BigDecimal summaryPrice, LocalDate delivered, String kindOfExpense,
+			List<VatRateSummary> vatRatesAndSummaries, CompanyContact supplier, List<EntryOfGoods> entriesOfGoods) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -172,16 +180,16 @@ public class Expense {
 		this.due_date = due_date;
 		this.methodOfPayment = methodOfPayment;
 		this.summaryPrice = summaryPrice;
+		this.delivered = delivered;
+		this.kindOfExpense = kindOfExpense;
 		this.vatRatesAndSummaries = vatRatesAndSummaries;
 		this.supplier = supplier;
-		this.expenseItems = expenseItems;
-		this.category = category;
 		this.entriesOfGoods = entriesOfGoods;
 	}
 
 	public Expense(String description, LocalDate created, LocalDate dateOfTaxableSupply, LocalDate due_date,
-			String methodOfPayment, BigDecimal summaryPrice, List<VatRateSummary> vatRatesAndSummaries,
-			CompanyContact supplier, ExpenseCategory category, List<EntryOfGoods> entriesOfGoods) {
+			String methodOfPayment, BigDecimal summaryPrice, LocalDate delivered, String kindOfExpense,
+			List<VatRateSummary> vatRatesAndSummaries, CompanyContact supplier, List<EntryOfGoods> entriesOfGoods) {
 		super();
 		this.description = description;
 		this.created = created;
@@ -189,10 +197,12 @@ public class Expense {
 		this.due_date = due_date;
 		this.methodOfPayment = methodOfPayment;
 		this.summaryPrice = summaryPrice;
+		this.delivered = delivered;
+		this.kindOfExpense = kindOfExpense;
 		this.vatRatesAndSummaries = vatRatesAndSummaries;
 		this.supplier = supplier;
-		this.category = category;
 		this.entriesOfGoods = entriesOfGoods;
-	} 
-
+	}
+	
+	
 }
