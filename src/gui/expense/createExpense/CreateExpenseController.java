@@ -85,10 +85,6 @@ public class CreateExpenseController implements Initializable{
 	@FXML
 	private CheckBox pricePerVatRateSummaryWithVatCheckbox;
 	@FXML
-	private TableColumn summaryTableVatRate;
-	@FXML
-	private TableColumn summaryTablePrice;
-	@FXML
 	private DatePicker billCreated;
 	@FXML
 	private DatePicker orderDelivered;
@@ -154,11 +150,23 @@ public class CreateExpenseController implements Initializable{
 	private ComboBox<Product> productList;
 	@FXML
 	private RadioButton inListSelected;
+	@FXML
+	private TableView<VatRateSummary> summaryTable;	
+	@FXML
+	private TableColumn<VatRateSummary, BigDecimal> summaryTablePriceWithoutVat;
+	@FXML
+	private TableColumn<VatRateSummary, BigDecimal> summaryTableVatRate;
+	@FXML
+	private TableColumn<VatRateSummary, BigDecimal> summaryTableVatValue;
+	@FXML
+	private TableColumn<VatRateSummary, BigDecimal> summaryTableWithVat;
+	
 	
 	private BigDecimal expensePriceSummary = new BigDecimal(0);
 	private ObservableList<EntryOfGoods> entryOfGoods = FXCollections.observableArrayList();
 	private ObservableList<VatRateSummary> vatRateSummaries = FXCollections.observableArrayList();
 	private Product foundProduct = null;
+	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -217,6 +225,13 @@ public class CreateExpenseController implements Initializable{
 				});
 		
 		itemsTable.setItems(entryOfGoods);
+		
+		summaryTablePriceWithoutVat.setCellValueFactory(new PropertyValueFactory<VatRateSummary, BigDecimal>("summaryWithoutVat"));
+		summaryTableVatRate.setCellValueFactory(new PropertyValueFactory<VatRateSummary, BigDecimal>("vatRate"));
+		summaryTableVatValue.setCellValueFactory(new PropertyValueFactory<VatRateSummary, BigDecimal>("vatValue"));
+		summaryTableWithVat.setCellValueFactory(new PropertyValueFactory<VatRateSummary, BigDecimal>("summaryWithVat"));
+		
+		summaryTable.setItems(vatRateSummaries);
 	}
 	
 	public void createNewProduct(ActionEvent event){
@@ -243,6 +258,10 @@ public class CreateExpenseController implements Initializable{
 		Expense expense = new Expense(billDescription.getText(), billCreated.getValue(), dateOfTaxableSupply.getValue(), dueDate.getValue(),
 				paymentMethod.getEditor().getText(), expensePriceSummary, orderDelivered.getValue(), "zbozi", vatRateSummaries,
 				companyContact, entryOfGoods);
+		for(VatRateSummary v : vatRateSummaries)
+			v.setExpense(expense);
+		for(EntryOfGoods e : entryOfGoods)
+			e.setExpense(expense);
 		expenseService.persist(expense);
 	}
 
@@ -348,18 +367,36 @@ public class CreateExpenseController implements Initializable{
 		vatRate.setValue(null);
 		vatRate.getEditor().setText("");
 		
-		/*System.out.println(itemsTable.getColumns().get(0).getCellData(0));
-		System.out.println(itemsTable.getColumns().get(1).getCellData(0));
-		System.out.println(itemsTable.getColumns().get(2).getCellData(0));
-		System.out.println(itemsTable.getColumns().get(3).getCellData(0));
-		System.out.println(itemsTable.getColumns().get(4).getCellData(0));
-		System.out.println(itemsTable.getColumns().get(5).getCellData(0));
-		System.out.println(itemsTable.getColumns().get(6).getCellData(0));
-		System.out.println(itemsTable.getColumns().get(7).getCellData(0));
-		System.out.println(itemsTable.getColumns().get(8).getCellData(0));
+		recalculateVatRateSummaries();
 		
-		for(EntryOfGoods e : entryOfGoods){
-			System.out.println(e.toString());
-		}*/
+	}
+	
+	private void recalculateVatRateSummaries(){
+		vatRateSummaries.clear();
+		if(itemsTable.getItems().isEmpty())
+			return;
+		for(int i = 0; i < itemsTable.getItems().size(); i++){
+			boolean exists = false;
+			for(VatRateSummary v : vatRateSummaries){
+				if(v.getVatRate().equals(itemsTable.getColumns().get(6).getCellData(i))){
+					v.setSummaryWithoutVat(v.getSummaryWithoutVat().add((BigDecimal)itemsTable.getColumns().get(7).getCellData(i)));
+					v.setVatValue(v.getVatValue().add((BigDecimal)itemsTable.getColumns().get(8).getCellData(i)));
+					v.setSummaryWithVat(v.getSummaryWithoutVat().add(v.getVatValue()));
+					exists = true;
+					break;
+				}
+			}
+			if(exists == false){
+				VatRateSummary v = new VatRateSummary((BigDecimal)itemsTable.getColumns().get(7).getCellData(i),
+						(BigDecimal)itemsTable.getColumns().get(6).getCellData(i), (BigDecimal)itemsTable.getColumns().get(8).getCellData(i),
+						((BigDecimal)itemsTable.getColumns().get(7).getCellData(i)).add((BigDecimal)itemsTable.getColumns().get(8).getCellData(i)));
+				vatRateSummaries.add(v);
+			}
+		}
+		BigDecimal sumForBill = new BigDecimal(0);
+		for(VatRateSummary v : vatRateSummaries){
+			sumForBill = sumForBill.add(v.getSummaryWithVat());
+		}
+		priceSummary.setText(sumForBill.toEngineeringString());
 	}
 }

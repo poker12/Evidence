@@ -90,7 +90,7 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Cena s DPH celkem" />
-                        <TextField fx:id="priceSummary" editable="false" promptText="0" />
+                        <TextField fx:id="priceSummary" editable="false" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -108,8 +108,10 @@
                   </HBox>
                   <TableView fx:id="summaryTable" prefHeight="99.0" prefWidth="275.0">
                     <columns>
-                      <TableColumn fx:id="summaryTableVatRate" prefWidth="203.0" text="sazba" />
-                      <TableColumn fx:id="summaryTablePrice" prefWidth="193.0" text="cena" />
+                        <TableColumn fx:id="summaryTablePriceWithoutVat" prefWidth="102.0" text="bez DPH" />
+                      <TableColumn fx:id="summaryTableVatRate" prefWidth="41.0" text="\%" />
+                      <TableColumn fx:id="summaryTableVatValue" prefWidth="98.0" text="DPH" />
+                        <TableColumn fx:id="summaryTableWithVat" prefWidth="155.0" text="Celkem" />
                     </columns>
                   </TableView>
                   <Button disable="true" mnemonicParsing="false" text="Odebrat" />
@@ -263,7 +265,7 @@
                   <TableColumn fx:id="itemsTablePricePerUnit" prefWidth="100.0" text="cena za jednotku" />
                   <TableColumn fx:id="itemsTableWithVat" prefWidth="44.0" text="s DPH" />
                   <TableColumn fx:id="itemsTableVatRate" prefWidth="99.0" text="sazba DPH (%)" />
-                  <TableColumn fx:id="itemsTableSummaryPrice" prefWidth="95.0" text="částka" />
+                  <TableColumn fx:id="itemsTableSummaryPrice" prefWidth="95.0" text="částka bez DPH" />
                   <TableColumn fx:id="itemsTableVatSum" prefWidth="78.0" text="DPH" />
               </columns>
             </TableView>

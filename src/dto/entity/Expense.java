@@ -15,10 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity(name="expenses")
 @DynamicUpdate
+@DynamicInsert
 public class Expense {
 	
 	@Id

@@ -11,7 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity(name="entry_of_goods")
+@DynamicInsert
+@DynamicUpdate
 public class EntryOfGoods {
 
 	@Id
