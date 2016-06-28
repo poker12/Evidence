@@ -84,5 +84,12 @@ public class CompanyContact extends ContactInformation{
 		this.savedSupplier = savedSupplier;
 	}
 
+	@Override
+	public String toString() {
+		if(companyName == null)
+			return null;
+		return companyName + " (" + companyTin + ")";
+	}
+
 	
 }

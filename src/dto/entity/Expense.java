@@ -59,7 +59,7 @@ public class Expense {
 	@OneToMany(mappedBy="expense", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<VatRateSummary> vatRatesAndSummaries; 
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="supplier_id", nullable=true)
 	private CompanyContact supplier;
 	
@@ -100,14 +100,6 @@ public class Expense {
 
 	public void setDateOfTaxableSupply(LocalDate dateOfTaxableSupply) {
 		this.dateOfTaxableSupply = dateOfTaxableSupply;
-	}
-
-	public LocalDate getDue_date() {
-		return dueDate;
-	}
-
-	public void setDue_date(LocalDate due_date) {
-		this.dueDate = due_date;
 	}
 
 	public String getMethodOfPayment() {
@@ -201,6 +193,7 @@ public class Expense {
 		this.entriesOfGoods = entriesOfGoods;
 	}
 
+	
 	public Expense(Long id, String billNumber, String description, LocalDate created, LocalDate dateOfTaxableSupply,
 			LocalDate due_date, String methodOfPayment, BigDecimal summaryPrice, LocalDate delivered,
 			String kindOfExpense, List<VatRateSummary> vatRatesAndSummaries, CompanyContact supplier,
@@ -220,6 +213,19 @@ public class Expense {
 		this.supplier = supplier;
 		this.expenseItems = expenseItems;
 		this.entriesOfGoods = entriesOfGoods;
+	}
+
+	public Expense() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
 	}
 	
 	

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.entryOfGoods.manageEntryOfGoods.ManageEntryOfGoodsController">
    <content>
       <VBox fx:id="paneProduct" fillWidth="true" snapToPixel="false">
          <children>
@@ -36,9 +36,9 @@
             <Separator />
             <TableView fx:id="entryOfGoodsTable">
                <columns>
-                  <TableColumn fx:id="added" prefWidth="93.0" text="naskladněno" />
-                  <TableColumn fx:id="plu" minWidth="0.0" prefWidth="79.0" text="PLU" />
-                  <TableColumn fx:id="productName" prefWidth="300.0" text="produkt" />
+                  <TableColumn fx:id="added" prefWidth="138.0" text="naskladněno" />
+                  <TableColumn fx:id="plu" minWidth="0.0" prefWidth="74.0" text="PLU" />
+                  <TableColumn fx:id="productName" prefWidth="260.0" text="produkt" />
                   <TableColumn fx:id="quantity" minWidth="0.0" prefWidth="96.0" text="množství" />
                   <TableColumn fx:id="pricePerPiece" prefWidth="106.0" text="cena za jednotku" />
                   <TableColumn fx:id="withVat" prefWidth="58.0" text="s DPH" />

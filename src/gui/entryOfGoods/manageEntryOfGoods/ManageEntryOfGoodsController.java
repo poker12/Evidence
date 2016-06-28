@@ -3,12 +3,11 @@ package gui.entryOfGoods.manageEntryOfGoods;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ResourceBundle;
 
 import dto.entity.EntryOfGoods;
-import dto.entity.Product;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
-import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -27,7 +26,7 @@ public class ManageEntryOfGoodsController implements Initializable{
 	@FXML
 	private TableView<EntryOfGoods> entryOfGoodsTable;
 	@FXML
-	private TableColumn<EntryOfGoods, LocalDateTime> added;
+	private TableColumn<EntryOfGoods, String> added;
 	@FXML
 	private TableColumn<EntryOfGoods, Long> plu;
 	@FXML
@@ -49,8 +48,9 @@ public class ManageEntryOfGoodsController implements Initializable{
 		EntryOfGoodsService entryOfGoodsService = new EntryOfGoodsService();
 		entryOfGoodsList.addAll(entryOfGoodsService.getAll());
 		
-		added.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, LocalDateTime>("added"));
-		plu.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Long>(column.getValue().getId()));
+		added.setCellValueFactory(column -> new ReadOnlyObjectWrapper<String>(column.getValue().getAdded().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+		//		new PropertyValueFactory<EntryOfGoods, LocalDateTime>("added"));
+		plu.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Long>(column.getValue().getProduct().getId()));
 		productName.setCellValueFactory(column -> new ReadOnlyStringWrapper(column.getValue().getProduct().getName()));
 		quantity.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, Long>("productQuantity"));
 		pricePerPiece.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, BigDecimal>("pricePerPiece"));
@@ -59,7 +59,5 @@ public class ManageEntryOfGoodsController implements Initializable{
 		
 		entryOfGoodsTable.setItems(entryOfGoodsList);
 	}
-
-	
 	
 }

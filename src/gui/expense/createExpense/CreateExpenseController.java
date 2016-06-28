@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import service.contactInformation.ContactInformationService;
 import service.expense.ExpenseService;
 import service.product.ProductService;
 import javafx.scene.control.Label;
@@ -156,6 +157,7 @@ public class CreateExpenseController implements Initializable{
 	private ObservableList<VatRateSummary> vatRateSummaries = FXCollections.observableArrayList();
 	private Product foundProduct = null;
 	
+	private ObservableList<CompanyContact> suppliers = FXCollections.observableArrayList();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -220,6 +222,13 @@ public class CreateExpenseController implements Initializable{
 		summaryTableWithVat.setCellValueFactory(new PropertyValueFactory<VatRateSummary, BigDecimal>("summaryWithVat"));
 		
 		summaryTable.setItems(vatRateSummaries);
+		
+		ContactInformationService contactInformationService = new ContactInformationService();
+		CompanyContact voidContact = new CompanyContact();
+		suppliers.add(voidContact);
+		suppliers.addAll(contactInformationService.getSuppliers());
+		
+		selectedCompany.setItems(suppliers);
 	}
 	
 	public void createNewProduct(ActionEvent event){
@@ -387,4 +396,29 @@ public class CreateExpenseController implements Initializable{
 		}
 		priceSummary.setText(sumForBill.toEngineeringString());
 	}
+	
+	public void supplierSelected(ActionEvent event){
+		CompanyContact contact = selectedCompany.getSelectionModel().getSelectedItem();
+		if(contact == null){
+			companyName.setText("");
+			companyTin.setText("");
+			companyVatin.setText("");
+			companyStreet.setText("");
+			companyCity.setText("");
+			companyZipCode.setText("");
+			companyCountry.setText("");
+			saveSupplier.setSelected(false);
+		}
+		else{
+			companyName.setText(contact.getCompanyName());
+			companyTin.setText(contact.getCompanyTin());
+			companyVatin.setText(contact.getCompanyVatin());
+			companyStreet.setText(contact.getStreet());
+			companyCity.setText(contact.getCity());
+			companyZipCode.setText(contact.getZipCode());
+			companyCountry.setText(contact.getCountry());
+			saveSupplier.setSelected(false);
+		}
+	}
+
 }

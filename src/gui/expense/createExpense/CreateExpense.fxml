@@ -26,7 +26,7 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Dodavatel" />
-                        <ComboBox fx:id="selectedCompany" prefHeight="25.0" prefWidth="148.0" promptText="Vybrat" />
+                        <ComboBox fx:id="selectedCompany" onAction="#supplierSelected" prefHeight="25.0" prefWidth="315.0" promptText="Vybrat" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -122,25 +122,25 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Datum vystavení*" />
-                        <DatePicker fx:id="billCreated" />
+                        <DatePicker fx:id="billCreated" editable="false" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Datum doručení*" />
-                        <DatePicker fx:id="orderDelivered" />
+                        <DatePicker fx:id="orderDelivered" editable="false" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Datum zdanitelného plnění" />
-                        <DatePicker fx:id="dateOfTaxableSupply" />
+                        <DatePicker fx:id="dateOfTaxableSupply" editable="false" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">
                      <children>
                         <Label text="Datum splatnosti*" />
-                        <DatePicker fx:id="dueDate" />
+                        <DatePicker fx:id="dueDate" editable="false" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="194.0" spacing="10.0">

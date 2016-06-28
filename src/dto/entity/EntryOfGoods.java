@@ -153,6 +153,11 @@ public class EntryOfGoods {
 				+ ", vatRate=" + vatRate + ", withVat=" + withVat + ", added=" + added + ", product=" + product
 				+ ", expense=" + expense + "]";
 	}
+
+	public EntryOfGoods() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }
