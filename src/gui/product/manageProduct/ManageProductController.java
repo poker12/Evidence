@@ -67,14 +67,7 @@ public class ManageProductController implements Initializable{
 		products.addAll(ps.getAll());
 		plu.setCellValueFactory(new PropertyValueFactory<Product, Long>("id"));
 		name.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-		category.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product,String>, ObservableValue<String>>() {
-
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Product, String> param) {
-				return new ReadOnlyStringWrapper(param.getValue().getCategory().getName());
-			}
-		});
-		
+		category.setCellValueFactory(column -> new ReadOnlyStringWrapper(column.getValue().getCategory().getName()));		
 		quantity.setCellValueFactory(new PropertyValueFactory<Product, Long>("quantity"));
 		priceWithVat.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product,BigDecimal>, ObservableValue<BigDecimal>>() {
 

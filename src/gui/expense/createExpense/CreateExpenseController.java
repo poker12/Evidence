@@ -1,26 +1,19 @@
 package gui.expense.createExpense;
 
-import java.awt.Component;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 
 import dto.entity.CompanyContact;
 import dto.entity.EntryOfGoods;
 import dto.entity.Expense;
 import dto.entity.Product;
 import dto.entity.VatRateSummary;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,9 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -160,9 +151,7 @@ public class CreateExpenseController implements Initializable{
 	private TableColumn<VatRateSummary, BigDecimal> summaryTableVatValue;
 	@FXML
 	private TableColumn<VatRateSummary, BigDecimal> summaryTableWithVat;
-	
-	
-	private BigDecimal expensePriceSummary = new BigDecimal(0);
+		
 	private ObservableList<EntryOfGoods> entryOfGoods = FXCollections.observableArrayList();
 	private ObservableList<VatRateSummary> vatRateSummaries = FXCollections.observableArrayList();
 	private Product foundProduct = null;
@@ -255,8 +244,8 @@ public class CreateExpenseController implements Initializable{
 		CompanyContact companyContact = new CompanyContact(companyCountry.getText(),
 				companyZipCode.getText(), companyCity.getText(), companyStreet.getText(),
 				null, null, null, companyName.getText(), companyTin.getText(), companyVatin.getText(), saveSupplier.isSelected());
-		Expense expense = new Expense(billDescription.getText(), billCreated.getValue(), dateOfTaxableSupply.getValue(), dueDate.getValue(),
-				paymentMethod.getEditor().getText(), expensePriceSummary, orderDelivered.getValue(), "zbozi", vatRateSummaries,
+		Expense expense = new Expense(billNumber.getText(), billDescription.getText(), billCreated.getValue(), dateOfTaxableSupply.getValue(), dueDate.getValue(),
+				paymentMethod.getEditor().getText(), new BigDecimal(priceSummary.getText()), orderDelivered.getValue(), "zbozi", vatRateSummaries,
 				companyContact, entryOfGoods);
 		for(VatRateSummary v : vatRateSummaries)
 			v.setExpense(expense);

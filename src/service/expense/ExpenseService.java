@@ -16,4 +16,5 @@ public class ExpenseService {
 		ExpenseDao dao = new ExpenseDao();
 		return dao.getAll();
 	}
+	
 }

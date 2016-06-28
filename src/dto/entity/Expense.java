@@ -28,6 +28,9 @@ public class Expense {
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="bill_number", length=20, nullable=false)
+	private String billNumber;
+	
 	@Column(name="description", nullable=false, length=150)
 	private String description;
 	
@@ -38,7 +41,7 @@ public class Expense {
 	private LocalDate dateOfTaxableSupply; //day of taxable supply (mostly same as delivered date)
 	
 	@Column(name="due_date", nullable=false)
-	private LocalDate due_date; //last day, when bill can be paid
+	private LocalDate dueDate; //last day, when bill can be paid
 	
 	@Column(name="method_of_payment", nullable=false, length=30)
 	private String methodOfPayment; // transaction, cash, credit card, zápoètem
@@ -100,11 +103,11 @@ public class Expense {
 	}
 
 	public LocalDate getDue_date() {
-		return due_date;
+		return dueDate;
 	}
 
 	public void setDue_date(LocalDate due_date) {
-		this.due_date = due_date;
+		this.dueDate = due_date;
 	}
 
 	public String getMethodOfPayment() {
@@ -171,15 +174,24 @@ public class Expense {
 		this.kindOfExpense = kindOfExpense;
 	}
 
-	public Expense(Long id, String description, LocalDate created, LocalDate dateOfTaxableSupply, LocalDate due_date,
-			String methodOfPayment, BigDecimal summaryPrice, LocalDate delivered, String kindOfExpense,
-			List<VatRateSummary> vatRatesAndSummaries, CompanyContact supplier, List<EntryOfGoods> entriesOfGoods) {
+	public String getBillNumber() {
+		return billNumber;
+	}
+
+	public void setBillNumber(String billNumber) {
+		this.billNumber = billNumber;
+	}
+
+	public Expense(String billNumber, String description, LocalDate created, LocalDate dateOfTaxableSupply,
+			LocalDate due_date, String methodOfPayment, BigDecimal summaryPrice, LocalDate delivered,
+			String kindOfExpense, List<VatRateSummary> vatRatesAndSummaries, CompanyContact supplier,
+			List<EntryOfGoods> entriesOfGoods) {
 		super();
-		this.id = id;
+		this.billNumber = billNumber;
 		this.description = description;
 		this.created = created;
 		this.dateOfTaxableSupply = dateOfTaxableSupply;
-		this.due_date = due_date;
+		this.dueDate = due_date;
 		this.methodOfPayment = methodOfPayment;
 		this.summaryPrice = summaryPrice;
 		this.delivered = delivered;
@@ -189,22 +201,27 @@ public class Expense {
 		this.entriesOfGoods = entriesOfGoods;
 	}
 
-	public Expense(String description, LocalDate created, LocalDate dateOfTaxableSupply, LocalDate due_date,
-			String methodOfPayment, BigDecimal summaryPrice, LocalDate delivered, String kindOfExpense,
-			List<VatRateSummary> vatRatesAndSummaries, CompanyContact supplier, List<EntryOfGoods> entriesOfGoods) {
+	public Expense(Long id, String billNumber, String description, LocalDate created, LocalDate dateOfTaxableSupply,
+			LocalDate due_date, String methodOfPayment, BigDecimal summaryPrice, LocalDate delivered,
+			String kindOfExpense, List<VatRateSummary> vatRatesAndSummaries, CompanyContact supplier,
+			List<ExpenseItem> expenseItems, List<EntryOfGoods> entriesOfGoods) {
 		super();
+		this.id = id;
+		this.billNumber = billNumber;
 		this.description = description;
 		this.created = created;
 		this.dateOfTaxableSupply = dateOfTaxableSupply;
-		this.due_date = due_date;
+		this.dueDate = due_date;
 		this.methodOfPayment = methodOfPayment;
 		this.summaryPrice = summaryPrice;
 		this.delivered = delivered;
 		this.kindOfExpense = kindOfExpense;
 		this.vatRatesAndSummaries = vatRatesAndSummaries;
 		this.supplier = supplier;
+		this.expenseItems = expenseItems;
 		this.entriesOfGoods = entriesOfGoods;
 	}
+	
 	
 	
 }

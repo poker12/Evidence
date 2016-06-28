@@ -52,17 +52,18 @@
                </items>
             </SplitPane>
             <Separator />
-            <TableView>
+            <TableView fx:id="expenseTable">
                <columns>
-                  <TableColumn prefWidth="71.0" text="vystavení" />
-                  <TableColumn minWidth="0.0" prefWidth="96.0" text="DUZP" />
-                  <TableColumn prefWidth="110.0" text="datum splatnosti" />
-                  <TableColumn prefWidth="107.0" text="způsob úhrady" />
-                  <TableColumn prefWidth="95.0" text="cena s DPH" />
-                  <TableColumn prefWidth="88.0" text="sazba DPH" />
-                  <TableColumn prefWidth="121.0" text="dodavatel" />
-                  <TableColumn prefWidth="75.0" text="popis" />
-                  <TableColumn prefWidth="408.0" text="kategorie" />
+                  <TableColumn fx:id="billNumber" prefWidth="85.99996948242188" text="doklad" />
+                  <TableColumn fx:id="billCreated" prefWidth="76.99996948242188" text="vystavení" />
+                  <TableColumn fx:id="delivered" prefWidth="106.00003051757812" text="datum doručení" />
+                  <TableColumn fx:id="dateOfTaxableSupply" minWidth="0.0" prefWidth="83.0" text="DUZP" />
+                  <TableColumn fx:id="dueDate" prefWidth="109.0" text="datum splatnosti" />
+                  <TableColumn fx:id="methodOfPayment" prefWidth="112.0" text="způsob úhrady" />
+                  <TableColumn fx:id="summaryPrice" prefWidth="107.0" text="cena s DPH" />
+                  <TableColumn fx:id="supplierName" prefWidth="174.0" text="dodavatel" />
+                  <TableColumn fx:id="expenseCategory" prefWidth="120.0" text="kategorie" />
+                  <TableColumn fx:id="expenseDescription" prefWidth="292.0" text="popis" />
                </columns>
             </TableView>
          </children>
