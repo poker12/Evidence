@@ -168,7 +168,6 @@ public class CreateExpenseController implements Initializable{
 
 					@Override
 					protected void updateItem(Product arg0, boolean arg1) {
-						// TODO Auto-generated method stub
 						super.updateItem(arg0, arg1);
 						if(arg0 != null)
 							setText(arg0.getId() + " | " + arg0.getName() + " | " + arg0.getCategory().getName());

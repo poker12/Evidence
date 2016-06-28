@@ -18,4 +18,9 @@ public class ProductCategoryService {
 		ProductCategoryDao pcd = new ProductCategoryDao();
 		return pcd.findById(id);
 	}
+	
+	public void persist(ProductCategory category){
+		ProductCategoryDao pcd = new ProductCategoryDao();
+		pcd.persist(category);
+	}
 }
