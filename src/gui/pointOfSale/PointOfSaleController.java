@@ -2,6 +2,8 @@ package gui.pointOfSale;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import service.PriceManager;
+import service.barcodeReader.BluetoothServer;
 import service.pointOfSale.PointOfSale;
 import service.pointOfSale.ProductFindingParameter;
 import javafx.scene.control.Label;
@@ -29,7 +32,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 
-public class PointOfSaleController implements Initializable{
+public class PointOfSaleController implements Initializable, Observer{
 	@FXML
 	private Label billSummizedPriceWithVat;
 	@FXML
@@ -103,6 +106,8 @@ public class PointOfSaleController implements Initializable{
 		itemsTable.setItems(pointOfSale.getItemList());
 		
 		productListCombobox.setOnAction(event -> searchBySelectFromList());
+		
+		BluetoothServer.getInstance().addObserver(this);
 	}
 
 	public void productSelected(){
@@ -240,5 +245,14 @@ public class PointOfSaleController implements Initializable{
 		companyTin.setDisable(value);
 		companyVatin.setDisable(value);
 		companyZipCode.setDisable(value);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("Precteno na kase: " + arg);
+		pointOfSale.findProduct((String)arg, ProductFindingParameter.FIND_BY_BARCODE);
+		Platform.runLater(() -> {
+			productSelected();
+		});
 	}
 }

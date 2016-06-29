@@ -1,5 +1,7 @@
 package application;
 	
+import java.io.IOException;
+
 import dao.hibernate.PersistenceManager;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -7,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import service.barcodeReader.BluetoothServer;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -16,9 +19,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/gui/main/Main.fxml"));
-			//Parent root = FXMLLoader.load(getClass().getResource("/gui/product/manageProductCategory/ManageProductCategory.fxml"));
 			//Parent root = FXMLLoader.load(getClass().getResource("/gui/vatRate/manageVatRate/ManageVatRate.fxml"));
-			//Parent root = FXMLLoader.load(getClass().getResource("/gui/expense/createExpense/CreateExpense.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -40,6 +41,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		
+		Thread thread = new Thread(BluetoothServer.getInstance());
+		thread.start();
 		launch(args);
 	}
 	
