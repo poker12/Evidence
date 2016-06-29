@@ -115,6 +115,12 @@ public class PointOfSale {
 			o.setOrder(order);
 		}
 		orderDao.persist(order);
+		ProductDao productDao = new ProductDao();
+		for(OrderProduct orderProduct : itemList){
+			Product product = orderProduct.getProduct();
+			product.setQuantity(product.getQuantity() - orderProduct.getProductQuantity());
+			productDao.updateIfExists(product, product.getId());
+		}
 		clear();
 	}
 	

@@ -70,7 +70,7 @@ public class Order {
 	@JoinColumn(name="delivering_address_id", nullable=true, unique=true)
 	private ContactInformation deliveringAddress; //dorucovaci adresa
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="billing_address_id", nullable=true, unique=true)
 	private ContactInformation billingAddress; //fakturacni adresa (udaje) v pripade eshop objednavky nebo nakupu na firmu
 	

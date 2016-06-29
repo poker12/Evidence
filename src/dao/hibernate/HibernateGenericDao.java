@@ -45,15 +45,14 @@ public abstract class HibernateGenericDao<T, ID extends Serializable> implements
 		em.close();
 		return entity;
 	}
-
+	
 	@Override
-	public T updateIfExists(T obj) throws EntityNotFoundException{
+	public T updateIfExists(T obj, ID id) throws EntityNotFoundException{
 		EntityManager em = PersistenceManager.getInstance().createEntityManager();
 		em.getTransaction().begin();
-		em.refresh(obj);
-		em.getTransaction().commit();
-		em.getTransaction().begin();
-		T entity = em.merge(obj);
+		T entity = findById(id);
+		if(entity != null)
+			em.merge(obj);
 		em.getTransaction().commit();
 		em.close();
 		return entity;

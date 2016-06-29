@@ -172,6 +172,13 @@ public class PointOfSaleController implements Initializable{
 		}
 	}
 	
+	public void handleClickOnAddButton(ActionEvent event){
+		pointOfSale.addItemToList(Long.valueOf(selectedProductItemQuantity.getText()));
+		billSummizedPriceWithoutVat.setText(pointOfSale.getSummarizedBillPriceWithoutVat().toString() + " Kè");
+		billSummizedPriceWithVat.setText(pointOfSale.getSummarizedBillPriceWithVat().toString() + " Kè");
+		selectedProductItemQuantity.setText(String.valueOf(1));
+	}
+	
 	public void createOrder(ActionEvent event){
 		if(company.isSelected()){
 			pointOfSale.setCompany(companyCountry.getText(), companyZipCode.getText(), companyCity.getText(),
@@ -179,9 +186,43 @@ public class PointOfSaleController implements Initializable{
 			pointOfSale.setSellingToCompany(true);
 		}
 		pointOfSale.createOrder();
+
+		clear();
+	}
+	
+	public void handleClickOnCompany(ActionEvent event){
+		if(company.isSelected()){
+			setDisableCompanyTextField(false);
+			
+			pointOfSale.setSellingToCompany(true);
+		}
+		else{
+			setDisableCompanyTextField(true);
+			
+			clearCompanyTextFields();
+			
+			pointOfSale.setSellingToCompany(false);
+		}
+	}
+	
+	public void handleClickOnCancel(ActionEvent event){
+		
+	}
+	
+	private void clear(){
+		pointOfSale.clear();
+		
 		billSummizedPriceWithoutVat.setText("0 Kè");
 		billSummizedPriceWithVat.setText("0 Kè");
 		
+		clearCompanyTextFields();
+		
+		setDisableCompanyTextField(true);
+		
+		company.setSelected(false);
+	}
+	
+	private void clearCompanyTextFields(){
 		companyCity.setText("");
 		companyCountry.setText("");
 		companyName.setText("");
@@ -189,48 +230,15 @@ public class PointOfSaleController implements Initializable{
 		companyTin.setText("");
 		companyVatin.setText("");
 		companyZipCode.setText("");
-		
-		companyCity.setDisable(true);
-		companyCountry.setDisable(true);
-		companyName.setDisable(true);
-		companyStreet.setDisable(true);
-		companyTin.setDisable(true);
-		companyVatin.setDisable(true);
-		companyZipCode.setDisable(true);
-		
-		company.setSelected(false);
 	}
 	
-	public void handleClickOnCompany(ActionEvent event){
-		if(company.isSelected()){
-			companyCity.setDisable(false);
-			companyCountry.setDisable(false);
-			companyName.setDisable(false);
-			companyStreet.setDisable(false);
-			companyTin.setDisable(false);
-			companyVatin.setDisable(false);
-			companyZipCode.setDisable(false);
-			
-			pointOfSale.setSellingToCompany(true);
-		}
-		else{
-			companyCity.setDisable(true);
-			companyCountry.setDisable(true);
-			companyName.setDisable(true);
-			companyStreet.setDisable(true);
-			companyTin.setDisable(true);
-			companyVatin.setDisable(true);
-			companyZipCode.setDisable(true);
-			
-			companyCity.setText("");
-			companyCountry.setText("");
-			companyName.setText("");
-			companyStreet.setText("");
-			companyTin.setText("");
-			companyVatin.setText("");
-			companyZipCode.setText("");
-			
-			pointOfSale.setSellingToCompany(false);
-		}
+	private void setDisableCompanyTextField(boolean value){
+		companyCity.setDisable(value);
+		companyCountry.setDisable(value);
+		companyName.setDisable(value);
+		companyStreet.setDisable(value);
+		companyTin.setDisable(value);
+		companyVatin.setDisable(value);
+		companyZipCode.setDisable(value);
 	}
 }

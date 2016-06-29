@@ -3,6 +3,7 @@ package dto.entity;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -49,7 +51,7 @@ public class ContactInformation {
 	@ManyToOne
 	@JoinColumn(name="user_secondary_contact", nullable=true)
 	private User userSecondaryContact;
-
+	
 	public Long getId() {
 		return id;
 	}

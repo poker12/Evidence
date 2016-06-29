@@ -26,4 +26,34 @@ public class PersonalContact extends ContactInformation{
 	@Column(name="person_surename", /*nullable=false*/ nullable=true, length=70)
 	private String personSurename;
 	
+	@Override
+	public String toString() {
+		return personName + " " + personSurename;
+	}
+
+	public String getPersonAcademicDegree() {
+		return personAcademicDegree;
+	}
+
+	public void setPersonAcademicDegree(String personAcademicDegree) {
+		this.personAcademicDegree = personAcademicDegree;
+	}
+
+	public String getPersonName() {
+		return personName;
+	}
+
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
+
+	public String getPersonSurename() {
+		return personSurename;
+	}
+
+	public void setPersonSurename(String personSurename) {
+		this.personSurename = personSurename;
+	}
+
+	
 }

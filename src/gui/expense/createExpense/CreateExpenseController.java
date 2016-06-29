@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import dao.hibernate.product.ProductDao;
 import dto.entity.CompanyContact;
 import dto.entity.EntryOfGoods;
 import dto.entity.Expense;
@@ -178,7 +179,7 @@ public class CreateExpenseController implements Initializable{
 						else
 							setText(null);
 					}
-					
+			
 				};
 			}
 		});
@@ -265,6 +266,13 @@ public class CreateExpenseController implements Initializable{
 		for(EntryOfGoods e : entryOfGoods)
 			e.setExpense(expense);
 		expenseService.persist(expense);
+		
+		ProductDao productDao = new ProductDao();
+		for(EntryOfGoods e : entryOfGoods){
+			Product product = e.getProduct();
+			product.setQuantity(product.getQuantity() + e.getProductQuantity());
+			productDao.updateIfExists(product, product.getId());
+		}
 	}
 
 	public void findProduct(ActionEvent event){

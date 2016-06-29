@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.invoice.manageInvoice.ManageInvoiceController">
    <content>
       <VBox fx:id="paneProduct" fillWidth="true" snapToPixel="false">
          <children>
@@ -32,38 +32,38 @@
                         <Label text="Zobrazené faktury" />
                         <HBox prefHeight="0.0" prefWidth="1176.0" spacing="10.0">
                            <children>
-                              <RadioButton mnemonicParsing="false" selected="true" text="čekající na zaplacení">
+                              <RadioButton fx:id="setOfInvoiceParameterWaitingForPayment" mnemonicParsing="false" selected="true" text="čekající na zaplacení">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="invoiceListSelectChoices" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="zaplacené" toggleGroup="$invoiceListSelectChoices" />
-                              <RadioButton mnemonicParsing="false" text="stornované" toggleGroup="$invoiceListSelectChoices" />
-                              <RadioButton mnemonicParsing="false" text="všechny" toggleGroup="$invoiceListSelectChoices" />
+                              <RadioButton fx:id="setOfInvoiceParameterPaid" mnemonicParsing="false" text="zaplacené" toggleGroup="$invoiceListSelectChoices" />
+                              <RadioButton fx:id="setOfInvoiceCanceled" mnemonicParsing="false" text="stornované" toggleGroup="$invoiceListSelectChoices" />
+                              <RadioButton fx:id="setOfInvoiceParameterAll" mnemonicParsing="false" text="všechny" toggleGroup="$invoiceListSelectChoices" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="0.0">
                      <children>
-                        <ChoiceBox prefWidth="150.0" />
-                        <TextField prefHeight="25.0" prefWidth="355.0" promptText="Vyhledávání" />
+                        <ChoiceBox fx:id="searchParameter" prefWidth="150.0" />
+                        <TextField fx:id="searchTextField" prefHeight="25.0" prefWidth="355.0" promptText="Vyhledávání" />
                      </children>
                   </HBox>
                </items>
             </SplitPane>
             <Separator />
-            <TableView>
+            <TableView fx:id="invoiceTable">
                <columns>
-                  <TableColumn prefWidth="71.0" text="id" />
-                  <TableColumn minWidth="0.0" prefWidth="70.0" text="storno" />
-                  <TableColumn prefWidth="89.0" text="dodáno" />
-                  <TableColumn prefWidth="125.0" text="datum splatnosti" />
-                  <TableColumn prefWidth="95.0" text="číslo faktury" />
-                  <TableColumn prefWidth="143.0" text="platební metoda" />
-                  <TableColumn prefWidth="95.0" text="zaplaceno" />
-                  <TableColumn prefWidth="123.0" text="cena s DPH" />
-                  <TableColumn prefWidth="364.0" text="fakturační adresa" />
+                  <TableColumn fx:id="invoiceNumber" prefWidth="95.0" text="číslo faktury" />
+                  <TableColumn fx:id="invoiceCreated" prefWidth="124.0" text="vytvořeno" />
+                  <TableColumn fx:id="dateOfTaxableSupply" prefWidth="111.0" text="duzp" />
+                  <TableColumn fx:id="invoiceDueDate" prefWidth="116.0" text="datum splatnosti" />
+                  <TableColumn fx:id="invoicePaid" prefWidth="129.0" text="zaplaceno" />
+                  <TableColumn fx:id="invoicePaymentMethod" prefWidth="137.0" text="platební metoda" />
+                  <TableColumn fx:id="invoiceSummaryPrice" prefWidth="95.0" text="cena s DPH" />
+                  <TableColumn fx:id="invoiceCanceled" minWidth="0.0" prefWidth="78.0" text="storno" />
+                  <TableColumn fx:id="invoiceBillAddress" prefWidth="314.0" text="fakturační adresa" />
                </columns>
             </TableView>
          </children>

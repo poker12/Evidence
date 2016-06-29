@@ -9,7 +9,7 @@ public interface GenericDao<T, ID extends Serializable> {
 	void persist(T obj);
 	void remove(T obj);
 	T merge(T obj);
-	T updateIfExists(T obj);
+	T updateIfExists(T obj, ID id);
 	T findById(ID id);
 	List<T> getAll();
 	void lock(T obj, LockModeType lockMode);

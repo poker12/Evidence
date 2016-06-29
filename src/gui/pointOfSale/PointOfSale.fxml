@@ -190,7 +190,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Přidat položku">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClickOnAddButton" text="Přidat položku">
                      <font>
                         <Font size="18.0" />
                      </font>

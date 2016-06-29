@@ -49,7 +49,6 @@ public class ManageEntryOfGoodsController implements Initializable{
 		entryOfGoodsList.addAll(entryOfGoodsService.getAll());
 		
 		added.setCellValueFactory(column -> new ReadOnlyObjectWrapper<String>(column.getValue().getAdded().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
-		//		new PropertyValueFactory<EntryOfGoods, LocalDateTime>("added"));
 		plu.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Long>(column.getValue().getProduct().getId()));
 		productName.setCellValueFactory(column -> new ReadOnlyStringWrapper(column.getValue().getProduct().getName()));
 		quantity.setCellValueFactory(new PropertyValueFactory<EntryOfGoods, Long>("productQuantity"));
