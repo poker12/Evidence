@@ -1,6 +1,5 @@
 package dao.hibernate.order;
 
-import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -18,7 +17,7 @@ public class OrderDao extends HibernateGenericDao<Order, Long>{
 
 	public Long getCountOfInvoicesInYear(int year){
 		EntityManager em = PersistenceManager.getInstance().createEntityManager();
-		Query q = em.createQuery("SELECT COUNT(o) FROM dto.entity.Order o WHERE year(o.invoiceCreated) = :year", Long.class);
+		Query q = em.createQuery("SELECT COUNT(o) FROM dto.entity.Order o WHERE year(o.invoiceCreated) = :year");
 		q.setParameter("year", year);
 		Long l = (Long)q.getSingleResult();
 		em.close();

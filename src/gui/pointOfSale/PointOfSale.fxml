@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.pointOfSale.PointOfSaleController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -78,8 +78,8 @@
                   <ComboBox fx:id="productListCombobox" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="Produkt ze seznamu" />
                   <SplitPane dividerPositions="0.5" prefHeight="0.0" prefWidth="544.0">
                     <items>
-                        <TextField fx:id="searchByPLUTextField" maxWidth="1.7976931348623157E308" promptText="PLU" />
-                        <TextField fx:id="searchByBarcodeTextField" maxWidth="1.7976931348623157E308" promptText="čárový kód" />
+                        <TextField fx:id="searchByPLUTextField" maxWidth="1.7976931348623157E308" onKeyPressed="#searchByPlu" promptText="PLU" />
+                        <TextField fx:id="searchByBarcodeTextField" maxWidth="1.7976931348623157E308" onKeyPressed="#searchByBarcode" promptText="čárový kód" />
                     </items>
                   </SplitPane>
                   <Separator prefWidth="200.0" />
@@ -155,7 +155,7 @@
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="selectedProductItemQuantity" alignment="CENTER_RIGHT" prefWidth="150.0" text="0">
+                        <TextField fx:id="selectedProductItemQuantity" alignment="CENTER_RIGHT" onKeyPressed="#handlePressedEnterOnSelectedProductItemQuantity" prefWidth="150.0" text="0">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -198,7 +198,7 @@
                   <Separator prefWidth="200.0" />
                   <VBox alignment="TOP_RIGHT" prefHeight="183.0" prefWidth="530.0">
                      <children>
-                        <CheckBox fx:id="company" mnemonicParsing="false" text="Na firmu" />
+                        <CheckBox fx:id="company" mnemonicParsing="false" onAction="#handleClickOnCompany" text="Na firmu" />
                         <TextField fx:id="companyTin" alignment="CENTER_RIGHT" disable="true" promptText="ič" />
                         <TextField fx:id="companyVatin" alignment="CENTER_RIGHT" disable="true" promptText="dič" />
                         <TextField fx:id="companyName" alignment="CENTER_RIGHT" disable="true" promptText="název firmy" />
@@ -215,7 +215,7 @@
                      </padding>
                   </VBox>
                   <Separator prefWidth="200.0" />
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Dokončit">
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#createOrder" text="Dokončit">
                      <font>
                         <Font size="18.0" />
                      </font>

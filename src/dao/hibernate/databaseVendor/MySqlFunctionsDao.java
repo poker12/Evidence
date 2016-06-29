@@ -12,7 +12,7 @@ public class MySqlFunctionsDao {
 
 	public LocalDateTime getCurrentDateTime(){
 		EntityManager em = PersistenceManager.getInstance().createEntityManager();
-		Query q = em.createNativeQuery("SELECT now() FROM dual", Timestamp.class);
+		Query q = em.createNativeQuery("SELECT now() FROM dual");
 		Timestamp t = (Timestamp)q.getSingleResult();
 		em.close();
 		return t.toLocalDateTime();

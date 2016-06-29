@@ -3,21 +3,30 @@ package gui.pointOfSale;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import application.Main;
 import dto.entity.OrderProduct;
 import dto.entity.Product;
+import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import service.PriceManager;
+import service.pointOfSale.PointOfSale;
+import service.pointOfSale.ProductFindingParameter;
 import javafx.scene.control.Label;
 
 import javafx.scene.control.ComboBox;
-
 import javafx.scene.control.CheckBox;
-
 import javafx.scene.control.TableView;
-
 import javafx.scene.control.TableColumn;
 
 public class PointOfSaleController implements Initializable{
@@ -76,12 +85,152 @@ public class PointOfSaleController implements Initializable{
 	@FXML
 	private TextField companyCountry;
 	
+	private PointOfSale pointOfSale = new PointOfSale();
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		pointOfSale.refreshListOfAllProducts();
+
+		productListCombobox.setItems(pointOfSale.getAllProducts());
 		
+		itemsColumnPlu.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Long>(column.getValue().getProduct().getId()));
+		itemsColumnName.setCellValueFactory(column -> new ReadOnlyStringWrapper(column.getValue().getProduct().getName()));
+		itemsColumnQuantity.setCellValueFactory(new PropertyValueFactory<OrderProduct, Long>("productQuantity"));
+		itemsColumnPriceWithVat.setCellValueFactory(column -> new ReadOnlyObjectWrapper<BigDecimal>(pointOfSale.getPricePerUniWithVat(column.getValue())));
+		itemsColumnVatRate.setCellValueFactory(new PropertyValueFactory<OrderProduct, BigDecimal>("vatRate"));
+		itemsColumnSummary.setCellValueFactory(column -> new ReadOnlyObjectWrapper<BigDecimal>(pointOfSale.getOrderProductSummaryPriceWithVat(column.getValue())));
+		
+		itemsTable.setItems(pointOfSale.getItemList());
+		
+		productListCombobox.setOnAction(event -> searchBySelectFromList());
 	}
 
+	public void productSelected(){
+		if(pointOfSale.getSelectedProduct() == null){
+			selectedProductItemQuantity.setText("0");
+			selectedProductName.setText("-");
+			selectedProductNumWaitingOnExpedition.setText("-");
+			selectedProductPricePerUnitWithVat.setText("-");
+			selectedProductPricePerUnitWithoutVat.setText("-");
+			selectedProductQuantityInWarehouse.setText("-");
+			selectedProductVatRate.setText("-");
+			return;
+		}
+		selectedProductItemQuantity.setText(pointOfSale.getSelectedProduct().getQuantity().toString());
+		selectedProductName.setText(pointOfSale.getSelectedProduct().getName());
+		//TODO dodìlat poèítání poètu produktu v nevyexpedovaných, nezrušených objednávkách
+		selectedProductNumWaitingOnExpedition.setText(String.valueOf(0));
+		if(pointOfSale.getSelectedProduct().getPriceHistory().get(0).getWithVat()){
+			selectedProductPricePerUnitWithoutVat.setText(
+					new PriceManager().calculatePriceWithoutVat(
+							pointOfSale.getSelectedProduct().getPriceHistory().get(0).getSellingPrice(),
+							pointOfSale.getSelectedProduct().getPriceHistory().get(0).getVatRate(),
+							2
+							).toString());
+			selectedProductPricePerUnitWithVat.setText(pointOfSale.getSelectedProduct().getPriceHistory().get(0).getSellingPrice().toString());
+		}
+		else{
+			selectedProductPricePerUnitWithVat.setText(
+					new PriceManager().calculatePriceWithVat(
+							pointOfSale.getSelectedProduct().getPriceHistory().get(0).getSellingPrice(),
+							pointOfSale.getSelectedProduct().getPriceHistory().get(0).getVatRate(),
+							2
+							).toString());
+			selectedProductPricePerUnitWithoutVat.setText(pointOfSale.getSelectedProduct().getPriceHistory().get(0).getSellingPrice().toString());
+		}
+		selectedProductQuantityInWarehouse.setText(pointOfSale.getSelectedProduct().getQuantity().toString());
+		selectedProductVatRate.setText(pointOfSale.getSelectedProduct().getPriceHistory().get(0).getVatRate().toString());
+		selectedProductItemQuantity.setText("1");
+		selectedProductItemQuantity.requestFocus();
+	}
 	
+	public void searchBySelectFromList(){
+		pointOfSale.findProduct(productListCombobox.getSelectionModel().getSelectedItem());
+		productSelected();
+	}
 	
+	public void searchByPlu(KeyEvent event){
+		if(event.getCode() == KeyCode.ENTER){
+			pointOfSale.findProduct(searchByPLUTextField.getText(), ProductFindingParameter.FIND_BY_PLU);
+			productSelected();
+		}
+	}
+	
+	public void searchByBarcode(KeyEvent event){
+		if(event.getCode() == KeyCode.ENTER){
+			pointOfSale.findProduct(searchByBarcodeTextField.getText(), ProductFindingParameter.FIND_BY_BARCODE);
+			productSelected();
+		}
+	}
+	
+	public void handlePressedEnterOnSelectedProductItemQuantity(KeyEvent event){
+		if(event.getCode() == KeyCode.ENTER){
+			pointOfSale.addItemToList(Long.valueOf(selectedProductItemQuantity.getText()));
+			billSummizedPriceWithoutVat.setText(pointOfSale.getSummarizedBillPriceWithoutVat().toString() + " Kè");
+			billSummizedPriceWithVat.setText(pointOfSale.getSummarizedBillPriceWithVat().toString() + " Kè");
+			selectedProductItemQuantity.setText(String.valueOf(1));
+		}
+	}
+	
+	public void createOrder(ActionEvent event){
+		if(company.isSelected()){
+			pointOfSale.setCompany(companyCountry.getText(), companyZipCode.getText(), companyCity.getText(),
+					companyStreet.getText(), companyName.getText(), companyTin.getText(), companyVatin.getText());
+			pointOfSale.setSellingToCompany(true);
+		}
+		pointOfSale.createOrder();
+		billSummizedPriceWithoutVat.setText("0 Kè");
+		billSummizedPriceWithVat.setText("0 Kè");
+		
+		companyCity.setText("");
+		companyCountry.setText("");
+		companyName.setText("");
+		companyStreet.setText("");
+		companyTin.setText("");
+		companyVatin.setText("");
+		companyZipCode.setText("");
+		
+		companyCity.setDisable(true);
+		companyCountry.setDisable(true);
+		companyName.setDisable(true);
+		companyStreet.setDisable(true);
+		companyTin.setDisable(true);
+		companyVatin.setDisable(true);
+		companyZipCode.setDisable(true);
+		
+		company.setSelected(false);
+	}
+	
+	public void handleClickOnCompany(ActionEvent event){
+		if(company.isSelected()){
+			companyCity.setDisable(false);
+			companyCountry.setDisable(false);
+			companyName.setDisable(false);
+			companyStreet.setDisable(false);
+			companyTin.setDisable(false);
+			companyVatin.setDisable(false);
+			companyZipCode.setDisable(false);
+			
+			pointOfSale.setSellingToCompany(true);
+		}
+		else{
+			companyCity.setDisable(true);
+			companyCountry.setDisable(true);
+			companyName.setDisable(true);
+			companyStreet.setDisable(true);
+			companyTin.setDisable(true);
+			companyVatin.setDisable(true);
+			companyZipCode.setDisable(true);
+			
+			companyCity.setText("");
+			companyCountry.setText("");
+			companyName.setText("");
+			companyStreet.setText("");
+			companyTin.setText("");
+			companyVatin.setText("");
+			companyZipCode.setText("");
+			
+			pointOfSale.setSellingToCompany(false);
+		}
+	}
 }

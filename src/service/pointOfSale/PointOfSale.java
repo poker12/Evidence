@@ -22,8 +22,6 @@ public class PointOfSale {
 	private ObservableList<OrderProduct> itemList = FXCollections.observableArrayList();
 	private CompanyContact company = null;
 	private Boolean sellingToCompany = false;
-	private BigDecimal billSummaryPriceWithVat = new BigDecimal(0);
-	private BigDecimal billSummaryPriceWithoutVat = new BigDecimal(0);
 	private Product selectedProduct = null;
 	private ObservableList<Product> allProducts = FXCollections.observableArrayList();
 	private String methodOfPayment = "hotovì";
@@ -52,6 +50,13 @@ public class PointOfSale {
 		return summary;
 	}
 	
+	public BigDecimal getPricePerUniWithVat(OrderProduct o){
+		if(o.getWithVat()){
+			return o.getPricePerUnit();
+		}
+		return new PriceManager().calculatePriceWithVat(o.getPricePerUnit(), o.getVatRate(), 2);
+	}
+	
 	private BigDecimal getOrderProductSummaryPriceWithoutVat(OrderProduct orderProduct){
 		if(orderProduct.getWithVat())
 			return new PriceManager().calculatePriceWithoutVat(orderProduct.getPricePerUnit(), orderProduct.getVatRate(), 2)
@@ -60,7 +65,7 @@ public class PointOfSale {
 				.multiply(new BigDecimal(orderProduct.getProductQuantity()));
 	}
 	
-	private BigDecimal getOrderProductSummaryPriceWithVat(OrderProduct orderProduct){
+	public BigDecimal getOrderProductSummaryPriceWithVat(OrderProduct orderProduct){
 		if(!orderProduct.getWithVat())
 			return new PriceManager().calculatePriceWithVat(orderProduct.getPricePerUnit(), orderProduct.getVatRate(), 2)
 					.multiply(new BigDecimal(orderProduct.getProductQuantity()));
@@ -101,8 +106,8 @@ public class PointOfSale {
 		List<VatRateSummary> vatRateSummaries = getBillVatRateSummaries();
 		order = new Order(currentDbDateTime, currentDbDateTime.toLocalDate(), currentDbDateTime, currentDbDateTime,
 				currentDbDateTime, (String.valueOf(currentDbDateTime.getYear()) + "/" + String.valueOf(countOfInvoiceInYear + 1)), Boolean.valueOf(false), currentDbDateTime.toLocalDate(),
-				methodOfPayment, getBillSummaryPriceWithVat(), vatRateSummaries,
-				(sellingToCompany)? company:null, itemList);
+				methodOfPayment, getSummarizedBillPriceWithVat(), vatRateSummaries,
+				company, itemList);
 		for(VatRateSummary v : vatRateSummaries){
 			v.setOrder(order);
 		}
@@ -110,14 +115,13 @@ public class PointOfSale {
 			o.setOrder(order);
 		}
 		orderDao.persist(order);
+		clear();
 	}
 	
 	public void clear(){
 		itemList.clear();
 		company = null;
 		sellingToCompany = false;
-		billSummaryPriceWithoutVat = new BigDecimal(0);
-		billSummaryPriceWithVat = new BigDecimal(0);
 		selectedProduct = null;
 		refreshListOfAllProducts();
 	}
@@ -147,12 +151,12 @@ public class PointOfSale {
 			return;
 		}
 		ProductDao dao = new ProductDao();
-		Product updatedProduct = dao.updateIfExists(product);
+		Product updatedProduct = dao.findById(product.getId());
 		if(updatedProduct == null){
-			selectedProduct = updatedProduct;
+			selectedProduct = null;
 		}
 		else{
-			selectedProduct = null;
+			selectedProduct = updatedProduct;
 		}
 	}
 	
@@ -183,8 +187,12 @@ public class PointOfSale {
 			List<Product> products = dao.findProductsByBarcode(variable);
 			Product product = null;
 			if(products != null){
-				product = products.get(0);
-				selectedProduct = product;
+				if(!products.isEmpty()){
+					product = products.get(0);
+					selectedProduct = product;
+				}
+				else
+					selectedProduct = null;
 			}
 			else
 				selectedProduct = null;
@@ -211,18 +219,6 @@ public class PointOfSale {
 	}
 	public void setSellingToCompany(Boolean sellingToCompany) {
 		this.sellingToCompany = sellingToCompany;
-	}
-	public BigDecimal getBillSummaryPriceWithVat() {
-		return billSummaryPriceWithVat;
-	}
-	public void setBillSummaryPriceWithVat(BigDecimal billSummaryPriceWithVat) {
-		this.billSummaryPriceWithVat = billSummaryPriceWithVat;
-	}
-	public BigDecimal getBillSummaryPriceWithoutVat() {
-		return billSummaryPriceWithoutVat;
-	}
-	public void setBillSummaryPriceWithoutVat(BigDecimal billSummaryPriceWithoutVat) {
-		this.billSummaryPriceWithoutVat = billSummaryPriceWithoutVat;
 	}
 
 	public Product getSelectedProduct() {
