@@ -159,6 +159,8 @@ public class CreateExpenseController implements Initializable{
 	
 	private ObservableList<CompanyContact> suppliers = FXCollections.observableArrayList();
 	
+	private Expense expense = null;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ProductService productService = new ProductService();
@@ -248,11 +250,14 @@ public class CreateExpenseController implements Initializable{
 	}
 	
 	public void saveExpense(ActionEvent event){
+		if(expense != null){
+			return;
+		}
 		ExpenseService expenseService = new ExpenseService();
 		CompanyContact companyContact = new CompanyContact(companyCountry.getText(),
 				companyZipCode.getText(), companyCity.getText(), companyStreet.getText(),
 				null, null, null, companyName.getText(), companyTin.getText(), companyVatin.getText(), saveSupplier.isSelected());
-		Expense expense = new Expense(billNumber.getText(), billDescription.getText(), billCreated.getValue(), dateOfTaxableSupply.getValue(), dueDate.getValue(),
+		expense = new Expense(billNumber.getText(), billDescription.getText(), billCreated.getValue(), dateOfTaxableSupply.getValue(), dueDate.getValue(),
 				paymentMethod.getEditor().getText(), new BigDecimal(priceSummary.getText()), orderDelivered.getValue(), "zbozi", vatRateSummaries,
 				companyContact, entryOfGoods);
 		for(VatRateSummary v : vatRateSummaries)

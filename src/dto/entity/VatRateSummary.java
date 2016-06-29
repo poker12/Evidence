@@ -120,5 +120,10 @@ public class VatRateSummary {
 		this.summaryWithVat = summaryWithVat;
 	}
 
+	public VatRateSummary() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 }

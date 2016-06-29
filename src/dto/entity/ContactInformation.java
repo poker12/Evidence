@@ -166,5 +166,14 @@ public class ContactInformation {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ContactInformation(String country, String zipCode, String city, String street) {
+		super();
+		this.country = country;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.street = street;
+	}
+
+	
 	
 }

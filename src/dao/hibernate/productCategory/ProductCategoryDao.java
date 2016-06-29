@@ -40,9 +40,6 @@ public class ProductCategoryDao extends HibernateGenericDao<ProductCategory, Lon
 		levelList = (String) sp.getOutputParameterValue("level_list");
 		idList = (String) sp.getOutputParameterValue("id_list");
 		nameList = (String) sp.getOutputParameterValue("name_list");
-		//System.out.println("level list: " + levelList);
-		//System.out.println("id list: " + idList);
-		//System.out.println("name list: " + nameList);
 		if(levelList == null || levelList.isEmpty() == true){
 			em.getTransaction().commit();
 			em.close();

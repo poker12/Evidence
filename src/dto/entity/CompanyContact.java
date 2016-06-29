@@ -91,5 +91,31 @@ public class CompanyContact extends ContactInformation{
 		return companyName + " (" + companyTin + ")";
 	}
 
+	public CompanyContact(Long id, String country, String zipCode, String city, String street,
+			String contactPhoneNumber, String contactEmail, String contactPerson, User userSecondaryContact) {
+		super(id, country, zipCode, city, street, contactPhoneNumber, contactEmail, contactPerson, userSecondaryContact);
+		// TODO Auto-generated constructor stub
+	}
+
+	public CompanyContact(String country, String zipCode, String city, String street, String contactPhoneNumber,
+			String contactEmail, String contactPerson, User userSecondaryContact) {
+		super(country, zipCode, city, street, contactPhoneNumber, contactEmail, contactPerson, userSecondaryContact);
+		// TODO Auto-generated constructor stub
+	}
+
+	public CompanyContact(String country, String zipCode, String city, String street, String contactPhoneNumber,
+			String contactEmail, String contactPerson) {
+		super(country, zipCode, city, street, contactPhoneNumber, contactEmail, contactPerson);
+		// TODO Auto-generated constructor stub
+	}
+
+	/*public CompanyContact(String country, String zipCode, String city, String street, String companyName,
+			String companyTin, String companyVatin) {
+		super(country, zipCode, city, street);
+		this.companyName = companyName;
+		this.companyTin = companyTin;
+		this.companyVatin = companyVatin;
+	}*/
+
 	
 }

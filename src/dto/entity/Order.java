@@ -76,5 +76,182 @@ public class Order {
 	
 	@OneToMany(mappedBy="order", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<OrderProduct> orderProductList;
+	
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
+	public Order(LocalDateTime orderCreated, LocalDate dueDate, LocalDateTime paid, LocalDateTime invoiceCreated,
+			LocalDateTime expedited, String invoiceNumber, Boolean canceled, LocalDate dateOfTaxableSupply,
+			String methodOfPayment, BigDecimal summaryPrice, List<VatRateSummary> vatRatesAndSummaries,
+			ContactInformation billingAddress, List<OrderProduct> orderProductList) {
+		super();
+		this.orderCreated = orderCreated;
+		this.dueDate = dueDate;
+		this.paid = paid;
+		this.invoiceCreated = invoiceCreated;
+		this.expedited = expedited;
+		this.invoiceNumber = invoiceNumber;
+		this.canceled = canceled;
+		this.dateOfTaxableSupply = dateOfTaxableSupply;
+		this.methodOfPayment = methodOfPayment;
+		this.summaryPrice = summaryPrice;
+		this.vatRatesAndSummaries = vatRatesAndSummaries;
+		this.billingAddress = billingAddress;
+		this.orderProductList = orderProductList;
+	}
+
+	public Order(Long id, LocalDateTime orderCreated, LocalDate dueDate, LocalDateTime paid,
+			LocalDateTime invoiceCreated, LocalDateTime expedited, String invoiceNumber, Boolean canceled,
+			LocalDate dateOfTaxableSupply, String methodOfPayment, BigDecimal summaryPrice,
+			List<VatRateSummary> vatRatesAndSummaries, User orderingCustomer, ContactInformation deliveringAddress,
+			ContactInformation billingAddress, List<OrderProduct> orderProductList) {
+		super();
+		this.id = id;
+		this.orderCreated = orderCreated;
+		this.dueDate = dueDate;
+		this.paid = paid;
+		this.invoiceCreated = invoiceCreated;
+		this.expedited = expedited;
+		this.invoiceNumber = invoiceNumber;
+		this.canceled = canceled;
+		this.dateOfTaxableSupply = dateOfTaxableSupply;
+		this.methodOfPayment = methodOfPayment;
+		this.summaryPrice = summaryPrice;
+		this.vatRatesAndSummaries = vatRatesAndSummaries;
+		this.orderingCustomer = orderingCustomer;
+		this.deliveringAddress = deliveringAddress;
+		this.billingAddress = billingAddress;
+		this.orderProductList = orderProductList;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getOrderCreated() {
+		return orderCreated;
+	}
+
+	public void setOrderCreated(LocalDateTime orderCreated) {
+		this.orderCreated = orderCreated;
+	}
+
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public LocalDateTime getPaid() {
+		return paid;
+	}
+
+	public void setPaid(LocalDateTime paid) {
+		this.paid = paid;
+	}
+
+	public LocalDateTime getInvoiceCreated() {
+		return invoiceCreated;
+	}
+
+	public void setInvoiceCreated(LocalDateTime invoiceCreated) {
+		this.invoiceCreated = invoiceCreated;
+	}
+
+	public LocalDateTime getExpedited() {
+		return expedited;
+	}
+
+	public void setExpedited(LocalDateTime expedited) {
+		this.expedited = expedited;
+	}
+
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
+
+	public Boolean getCanceled() {
+		return canceled;
+	}
+
+	public void setCanceled(Boolean canceled) {
+		this.canceled = canceled;
+	}
+
+	public LocalDate getDateOfTaxableSupply() {
+		return dateOfTaxableSupply;
+	}
+
+	public void setDateOfTaxableSupply(LocalDate dateOfTaxableSupply) {
+		this.dateOfTaxableSupply = dateOfTaxableSupply;
+	}
+
+	public String getMethodOfPayment() {
+		return methodOfPayment;
+	}
+
+	public void setMethodOfPayment(String methodOfPayment) {
+		this.methodOfPayment = methodOfPayment;
+	}
+
+	public BigDecimal getSummaryPrice() {
+		return summaryPrice;
+	}
+
+	public void setSummaryPrice(BigDecimal summaryPrice) {
+		this.summaryPrice = summaryPrice;
+	}
+
+	public List<VatRateSummary> getVatRatesAndSummaries() {
+		return vatRatesAndSummaries;
+	}
+
+	public void setVatRatesAndSummaries(List<VatRateSummary> vatRatesAndSummaries) {
+		this.vatRatesAndSummaries = vatRatesAndSummaries;
+	}
+
+	public User getOrderingCustomer() {
+		return orderingCustomer;
+	}
+
+	public void setOrderingCustomer(User orderingCustomer) {
+		this.orderingCustomer = orderingCustomer;
+	}
+
+	public ContactInformation getDeliveringAddress() {
+		return deliveringAddress;
+	}
+
+	public void setDeliveringAddress(ContactInformation deliveringAddress) {
+		this.deliveringAddress = deliveringAddress;
+	}
+
+	public ContactInformation getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(ContactInformation billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+	public List<OrderProduct> getOrderProductList() {
+		return orderProductList;
+	}
+
+	public void setOrderProductList(List<OrderProduct> orderProductList) {
+		this.orderProductList = orderProductList;
+	}
+	
 }

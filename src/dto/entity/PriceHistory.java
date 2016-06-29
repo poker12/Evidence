@@ -33,11 +33,11 @@ public class PriceHistory {
 	@Column(name="end_date_time", nullable=true)
 	private LocalDateTime endDateTime;
 	
-	@Column(name="selling_price_with_vat", nullable=true, precision=10, scale=2)
-	private BigDecimal sellingPriceWithVat;
+	@Column(name="selling_price", nullable=true, precision=10, scale=2)
+	private BigDecimal sellingPrice;
 	
-	@Column(name="selling_price_without_vat", nullable=true, precision=10, scale=2)
-	private BigDecimal sellingPriceWithoutVat;
+	@Column(name="withVat", nullable=true, precision=10, scale=2)
+	private Boolean withVat;
 	
 	@Column(name="vat_rate", precision=5, scale=2, nullable=false)
 	private BigDecimal vatRate;
@@ -46,35 +46,37 @@ public class PriceHistory {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public PriceHistory(Long id, Product product, LocalDateTime startDateTime, LocalDateTime endDateTime,
-			BigDecimal sellingPriceWithVat, BigDecimal sellingPriceWithoutVat, BigDecimal vatRate) {
+			BigDecimal sellingPrice, Boolean withVat, BigDecimal vatRate) {
 		super();
 		this.id = id;
 		this.product = product;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
-		this.sellingPriceWithVat = sellingPriceWithVat;
-		this.sellingPriceWithoutVat = sellingPriceWithoutVat;
+		this.sellingPrice = sellingPrice;
+		this.withVat = withVat;
 		this.vatRate = vatRate;
 	}
 
-	public PriceHistory(Product product, LocalDateTime startDateTime, LocalDateTime endDateTime,
-			BigDecimal sellingPriceWithVat, BigDecimal vatRate) {
-		super();
-		this.product = product;
-		this.startDateTime = startDateTime;
-		this.endDateTime = endDateTime;
-		this.sellingPriceWithVat = sellingPriceWithVat;
-		this.vatRate = vatRate;
-	}
-
-	public PriceHistory(Product product, LocalDateTime endDateTime, BigDecimal sellingPriceWithVat,
+	public PriceHistory(Product product, LocalDateTime endDateTime, BigDecimal sellingPrice, Boolean withVat,
 			BigDecimal vatRate) {
 		super();
 		this.product = product;
 		this.endDateTime = endDateTime;
-		this.sellingPriceWithVat = sellingPriceWithVat;
+		this.sellingPrice = sellingPrice;
+		this.withVat = withVat;
+		this.vatRate = vatRate;
+	}
+
+	public PriceHistory(Product product, LocalDateTime startDateTime, LocalDateTime endDateTime,
+			BigDecimal sellingPrice, Boolean withVat, BigDecimal vatRate) {
+		super();
+		this.product = product;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
+		this.sellingPrice = sellingPrice;
+		this.withVat = withVat;
 		this.vatRate = vatRate;
 	}
 
@@ -110,20 +112,20 @@ public class PriceHistory {
 		this.endDateTime = endDateTime;
 	}
 
-	public BigDecimal getSellingPriceWithVat() {
-		return sellingPriceWithVat;
+	public BigDecimal getSellingPrice() {
+		return sellingPrice;
 	}
 
-	public void setSellingPriceWithVat(BigDecimal sellingPriceWithVat) {
-		this.sellingPriceWithVat = sellingPriceWithVat;
+	public void setSellingPrice(BigDecimal sellingPrice) {
+		this.sellingPrice = sellingPrice;
 	}
 
-	public BigDecimal getSellingPriceWithoutVat() {
-		return sellingPriceWithoutVat;
+	public Boolean getWithVat() {
+		return withVat;
 	}
 
-	public void setSellingPriceWithoutVat(BigDecimal sellingPriceWithoutVat) {
-		this.sellingPriceWithoutVat = sellingPriceWithoutVat;
+	public void setWithVat(Boolean withVat) {
+		this.withVat = withVat;
 	}
 
 	public BigDecimal getVatRate() {
@@ -133,6 +135,5 @@ public class PriceHistory {
 	public void setVatRate(BigDecimal vatRate) {
 		this.vatRate = vatRate;
 	}
-
 	
 }

@@ -38,7 +38,9 @@ public class CreateProductController implements Initializable{
 	@FXML
 	private TextField name;
 	@FXML
-	private TextField priceWithVat;
+	private TextField price;
+	@FXML
+	private CheckBox withVat;
 	@FXML
 	private ComboBox<String> vatRate;
 	@FXML
@@ -90,9 +92,8 @@ public class CreateProductController implements Initializable{
 			ProductCategory selectedCategory = null;
 			selectedCategory = new ProductCategoryService().findById(category.getValue().productCategoryId);
 			product = new Product(name.getText(), archived.isSelected(), description.getText(), eshop.isSelected(), 0l, selectedCategory);
-			PriceHistory priceHistory = new PriceHistory(product, null, 
-					new BigDecimal(priceWithVat.getText()), 
-					new BigDecimal(vatRate.getEditor().getText()));
+			PriceHistory priceHistory = new PriceHistory(product, null, new BigDecimal(price.getText()),
+					withVat.isSelected(), new BigDecimal(vatRate.getEditor().getText()));
 			List<PriceHistory> phList = new ArrayList<>();
 			phList.add(priceHistory);
 			product.setPriceHistory(phList);

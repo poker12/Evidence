@@ -47,7 +47,9 @@ public class ManageProductController implements Initializable{
 	@FXML
 	private TableColumn<Product, Long> quantity;
 	@FXML
-	private TableColumn<Product, BigDecimal> priceWithVat;
+	private TableColumn<Product, BigDecimal> price;
+	@FXML
+	private TableColumn<Product, Boolean> withVat;
 	@FXML
 	private TableColumn<Product, BigDecimal> vatRate;
 	@FXML
@@ -69,7 +71,7 @@ public class ManageProductController implements Initializable{
 		name.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
 		category.setCellValueFactory(column -> new ReadOnlyStringWrapper(column.getValue().getCategory().getName()));		
 		quantity.setCellValueFactory(new PropertyValueFactory<Product, Long>("quantity"));
-		priceWithVat.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product,BigDecimal>, ObservableValue<BigDecimal>>() {
+		price.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product,BigDecimal>, ObservableValue<BigDecimal>>() {
 
 			@Override
 			public ObservableValue<BigDecimal> call(CellDataFeatures<Product, BigDecimal> param) {
@@ -89,7 +91,31 @@ public class ManageProductController implements Initializable{
 				PriceHistory ph = phList.get(0);
 				if(ph == null)
 					return null;
-				return new SimpleObjectProperty<BigDecimal>(ph.getSellingPriceWithVat());
+				return new SimpleObjectProperty<BigDecimal>(ph.getSellingPrice());
+			}
+		});
+		
+		withVat.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product,Boolean>, ObservableValue<Boolean>>() {
+
+			@Override
+			public ObservableValue<Boolean> call(CellDataFeatures<Product, Boolean> param) {
+				List<PriceHistory> phList = param.getValue().getPriceHistory();
+				phList.sort(new Comparator<PriceHistory>() {
+
+					@Override
+					public int compare(PriceHistory o1, PriceHistory o2) {
+						if(o1.getStartDateTime().isEqual(o2.getStartDateTime()))
+								return 0;
+						else if(o1.getStartDateTime().isAfter(o2.getStartDateTime()))
+							return -1;
+						else
+							return 1;
+					}
+				});
+				PriceHistory ph = phList.get(0);
+				if(ph == null)
+					return null;
+				return new SimpleObjectProperty<Boolean>(ph.getWithVat());
 			}
 		});
 		
