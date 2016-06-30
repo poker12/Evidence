@@ -1,10 +1,10 @@
 package service.invoice;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 public class Invoice {
 
-	private class Item{
-		private String name;
-		
-	}
-	
+	private List<Item> items;
+	private BigDecimal summaryWithVat;
 }
