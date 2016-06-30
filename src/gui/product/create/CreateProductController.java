@@ -5,12 +5,16 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import dao.hibernate.productCategory.ProductCategoryLevelContainer;
+import dto.entity.Barcode;
 import dto.entity.PriceHistory;
 import dto.entity.Product;
 import dto.entity.ProductCategory;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,10 +31,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import service.barcodeReader.BluetoothServer;
 import service.product.ProductService;
 import service.productCategory.ProductCategoryService;
 
-public class CreateProductController implements Initializable{
+public class CreateProductController implements Initializable, Observer{
 	@FXML
 	private VBox createProduct;
 	@FXML
@@ -63,6 +68,7 @@ public class CreateProductController implements Initializable{
 	
 	private ObservableList<ProductCategoryLevelContainer> prodCategoryList = FXCollections.observableArrayList();
 	private ObservableList<String> vatRates = FXCollections.observableArrayList();
+	private ObservableList<String> barcodes = FXCollections.observableArrayList();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -70,6 +76,8 @@ public class CreateProductController implements Initializable{
 		prodCategoryList.addAll(pcs.getProductCategoryHierarchy());
 		category.setItems(prodCategoryList);
 		vatRate.setItems(vatRates);
+		barcodeList.setItems(barcodes);
+		BluetoothServer.getInstance().addObserver(this);
 	}
 	
 	public void addCategory(ActionEvent event){
@@ -91,9 +99,13 @@ public class CreateProductController implements Initializable{
 			Product product;
 			ProductCategory selectedCategory = null;
 			selectedCategory = new ProductCategoryService().findById(category.getValue().productCategoryId);
-			product = new Product(name.getText(), archived.isSelected(), description.getText(), eshop.isSelected(), 0l, selectedCategory);
+			List<Barcode> codeList = new ArrayList<>();
+			for(String barcode : barcodes)
+				codeList.add(new Barcode(barcode));
+			product = new Product(name.getText(), archived.isSelected(), description.getText(), eshop.isSelected(), 0l, selectedCategory, codeList);
 			PriceHistory priceHistory = new PriceHistory(product, null, new BigDecimal(price.getText()),
 					withVat.isSelected(), new BigDecimal(vatRate.getEditor().getText()));
+			for(Barcode b : codeList) b.setProduct(product);
 			List<PriceHistory> phList = new ArrayList<>();
 			phList.add(priceHistory);
 			product.setPriceHistory(phList);
@@ -106,6 +118,14 @@ public class CreateProductController implements Initializable{
 			
 		}
 		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		Platform.runLater(() -> {
+			if(!barcodes.contains(arg))
+				barcodes.add((String)arg);
+		});
 	}
 	
 	//public void edit(Product)

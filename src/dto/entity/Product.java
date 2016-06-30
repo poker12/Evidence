@@ -84,6 +84,20 @@ public class Product {
 		return true;
 	}
 
+	
+	
+	public Product(String name, Boolean archived, String description, Boolean visibilityInEshop, Long quantity,
+			ProductCategory category, List<Barcode> barcodes) {
+		super();
+		this.name = name;
+		this.archived = archived;
+		this.description = description;
+		this.visibilityInEshop = visibilityInEshop;
+		this.quantity = quantity;
+		this.category = category;
+		this.barcodes = barcodes;
+	}
+
 	public Product(String name, Boolean archived, String description, Boolean visibilityInEshop, Long quantity,
 			ProductCategory category) {
 		super();

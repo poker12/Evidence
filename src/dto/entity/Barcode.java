@@ -47,6 +47,27 @@ public class Barcode {
 	public void setBarcode(String barcode) {
 		this.barcode = barcode;
 	}
-	
+
+	public Barcode(Product product, String barcode) {
+		super();
+		this.product = product;
+		this.barcode = barcode;
+	}
+
+	public Barcode(Long id, Product product, String barcode) {
+		super();
+		this.id = id;
+		this.product = product;
+		this.barcode = barcode;
+	}
+
+	public Barcode(String barcode) {
+		super();
+		this.barcode = barcode;
+	}
+
+	public Barcode() {
+		super();
+	}
 	
 }

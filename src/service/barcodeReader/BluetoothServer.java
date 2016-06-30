@@ -70,9 +70,21 @@ public class BluetoothServer extends Observable implements Runnable{
 		}
 	}
 	
+	public void runServer(){
+		if(!initialize()){
+			System.out.println("Bluetooth nebyl nalezen");	
+			return;
+		}
+		try {
+			startServer();
+		} catch (IOException e) {
+			System.out.println("Spojeni preruseno");
+		}
+	}
+	
 	public void startServer() throws IOException{
         //open server url
-        while(true){
+        while(!Thread.currentThread().isInterrupted()){
 	        StreamConnectionNotifier streamConnNotifier = (StreamConnectionNotifier)Connector.open(connectionString);
 	        
 	        //Wait for client connection
@@ -129,16 +141,7 @@ public class BluetoothServer extends Observable implements Runnable{
 
 	@Override
 	public void run() {
-		if(initialize()){
-			try {
-				startServer();
-			} catch (IOException e) {
-				System.out.println("Spojeni bylo prerusno nebo nebylo navazano");
-				e.printStackTrace();
-			}
-		}
-		else
-			System.out.println("Bluetooth nebyl nalezen");
+		runServer();
 	}
 	
 }

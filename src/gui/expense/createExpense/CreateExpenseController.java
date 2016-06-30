@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import dao.hibernate.product.ProductDao;
@@ -13,6 +15,7 @@ import dto.entity.EntryOfGoods;
 import dto.entity.Expense;
 import dto.entity.Product;
 import dto.entity.VatRateSummary;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -28,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import service.barcodeReader.BluetoothServer;
 import service.contactInformation.ContactInformationService;
 import service.expense.ExpenseService;
 import service.product.ProductService;
@@ -49,7 +53,7 @@ import javafx.scene.control.TableView;
 
 import javafx.scene.control.TableColumn;
 
-public class CreateExpenseController implements Initializable{
+public class CreateExpenseController implements Initializable, Observer{
 	
 	@FXML
 	private ComboBox<CompanyContact> selectedCompany;
@@ -232,6 +236,8 @@ public class CreateExpenseController implements Initializable{
 		suppliers.addAll(contactInformationService.getSuppliers());
 		
 		selectedCompany.setItems(suppliers);
+		
+		BluetoothServer.getInstance().addObserver(this);
 	}
 	
 	public void createNewProduct(ActionEvent event){
@@ -432,6 +438,22 @@ public class CreateExpenseController implements Initializable{
 			companyCountry.setText(contact.getCountry());
 			saveSupplier.setSelected(false);
 		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		ProductService productService = new ProductService();
+		List<Product> products = productService.findProductsByBarcode((String)arg);
+		Platform.runLater(() -> {
+			if(!products.isEmpty()){
+				foundProduct = products.get(0);
+				foundProductLabel.setText(foundProduct.getId() + " | " + foundProduct.getName() + " | " + foundProduct.getCategory().getName());
+			}
+			else
+				foundProductLabel.setText("Nenalezeno");
+			if(foundProduct != null)
+				quantity.requestFocus();
+		});
 	}
 
 }

@@ -249,7 +249,6 @@ public class PointOfSaleController implements Initializable, Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("Precteno na kase: " + arg);
 		pointOfSale.findProduct((String)arg, ProductFindingParameter.FIND_BY_BARCODE);
 		Platform.runLater(() -> {
 			productSelected();
